@@ -10,10 +10,6 @@
 
 The dashboard combines spatial analytics, scenario-based techno-economic assessment and GHG accounting to support evidence-based reasoning about where biomethane projects may be most promising.
 
-> Add the dashboard hero image before publishing:
->
-> `images/menu.png`
-
 ---
 
 ## Project highlights
@@ -33,7 +29,7 @@ The dashboard combines spatial analytics, scenario-based techno-economic assessm
 
 | Page | Purpose |
 |---|---|
-| **Landing page** | Project entry point and navigation |
+| **Menu** | Project entry point and navigation |
 | **Biomethane Production Potential** | Municipal maps, top-ranked municipalities, feedstock composition and regional treemap |
 | **Cost** | Cost maps, cost-efficient municipalities, biorefinery scale, LCOE and abatement cost |
 | **GHG Emissions** | Net emissions maps, largest savings, component-level emissions waterfall and scenario comparison KPIs |
