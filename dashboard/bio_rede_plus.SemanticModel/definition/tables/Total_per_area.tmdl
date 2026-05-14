@@ -1,0 +1,35 @@
+table Total_per_area
+	lineageTag: 00b8a344-742a-4bc7-9220-31631eb0335b
+
+	measure Area_selected = ```
+			
+			CONCATENATEX(
+			    VALUES('Total_per_area'[Total_per_area]), 
+			    'Total_per_area'[Total_per_area], 
+			    ", "
+			)
+			```
+		lineageTag: 6a87d4ba-caac-463d-b504-1a2c4a57e6f5
+
+	column Total_per_area
+		dataType: string
+		lineageTag: ea974dfe-1859-4657-82b1-2fcac7d93998
+		summarizeBy: none
+		sourceColumn: Total_per_area
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Total_per_area = m
+		mode: import
+		source =
+				let
+				    Origem = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCskvScxRitWJVgpILVJILEpNVIqNBQA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Total_per_area = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Origem,{{"Total_per_area", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","Per area","Total per km²",Replacer.ReplaceText,{"Total_per_area"})
+				in
+				    #"Valor Substituído"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

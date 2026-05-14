@@ -1,0 +1,110 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "33e126be07e65089d7d6",
+  "displayName": "GHG",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "pageBinding": {
+    "name": "4a3a8a704320c4cc6d40",
+    "type": "Default",
+    "parameters": []
+  },
+  "objects": {
+    "outspacePane": [
+      {
+        "properties": {
+          "width": {
+            "expr": {
+              "Literal": {
+                "Value": "330L"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F0F0F0'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 0,
+                    "Percent": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "425538e9800b010278a1",
+      "target": "1887504ee0e4e9636984",
+      "type": "NoFilter"
+    },
+    {
+      "source": "425538e9800b010278a1",
+      "target": "d0739f0fc711cc4565d9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "e882c18980070522a6a9",
+      "target": "425538e9800b010278a1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "e882c18980070522a6a9",
+      "target": "562ab2cb4a152800d5b9",
+      "type": "DataFilter"
+    },
+    {
+      "source": "3621e267c74eabca7cb5",
+      "target": "425538e9800b010278a1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3621e267c74eabca7cb5",
+      "target": "1887504ee0e4e9636984",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3621e267c74eabca7cb5",
+      "target": "d0739f0fc711cc4565d9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3621e267c74eabca7cb5",
+      "target": "562ab2cb4a152800d5b9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "425538e9800b010278a1",
+      "target": "3621e267c74eabca7cb5",
+      "type": "NoFilter"
+    }
+  ]
+}

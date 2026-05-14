@@ -1,0 +1,32 @@
+table Practice
+	lineageTag: cd560ef1-a944-4eb4-b2e0-ace332ddc601
+
+	measure Practice_selected = ```
+			
+			CONCATENATEX(
+			    VALUES('Practice'[Practice]), 
+			    'Practice'[Practice], 
+			    ", "
+			)
+			```
+		lineageTag: 338251da-495e-49da-9e52-d74c33c7737c
+
+	column Practice
+		dataType: string
+		lineageTag: c85947cd-af70-4d2b-8f71-96e86d52df45
+		summarizeBy: none
+		sourceColumn: Practice
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Practice = m
+		mode: import
+		source =
+				let
+				    Origem = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCi5JzEtJLEpRitWJVnJKLS5RCChKTC7JTE5Vio0FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Practice = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Origem,{{"Practice", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

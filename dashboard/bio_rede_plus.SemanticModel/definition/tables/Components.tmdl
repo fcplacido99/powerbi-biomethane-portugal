@@ -1,0 +1,90 @@
+table Components
+	lineageTag: dc8b55f3-02c0-4521-8662-d58d405e258f
+
+	measure 'Waterfall Value' = ```
+			
+			VAR Refinery =
+			    SUM('GHG'[BioRefinery Emissions kt CO₂-eq yr⁻¹])
+			VAR FS_transport =
+			    SUM('GHG'[Feedstock Transport Emissions kt CO₂-eq yr⁻¹])
+			VAR GI_transport =
+			    SUM('GHG'[Grid injection transport emissions kt CO₂-eq yr⁻¹])
+			VAR Fert =
+			    SUM('GHG'[Fertilizer Avoided Emissions kt CO₂-eq yr⁻¹])
+			VAR Waste =
+			    SUM('GHG'[Waste Management Avoided Emissions kt CO₂-eq yr⁻¹])
+			VAR NG =
+			    SUM('GHG'[NG Avoided Emissions kt CO₂-eq yr⁻¹])
+			
+			RETURN
+			SWITCH(
+			    SELECTEDVALUE(Components[Component]),
+			    "BioRefinery", Refinery,
+			    "Feedstock Transport", FS_transport,
+			    "Grid injection transport", GI_transport,
+			    "Fertilizer", Fert,
+			    "Natural Gas", NG,
+			    "Waste Management", Waste,
+			    "Net Impact", Refinery + FS_transport + GI_transport + Fert + Waste + NG
+			)
+			
+			```
+		lineageTag: 52f0a32d-bcd2-4c2c-894e-03d6eac73bcb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Waterfall Value AVG' =
+			
+			VAR Refinery =
+			    SUM('GHG_avg'[BioRefinery Emissions kt CO₂-eq yr⁻¹])
+			VAR FS_transport =
+			    SUM('GHG_avg'[Feedstock Transport Emissions kt CO₂-eq yr⁻¹])
+			VAR GI_transport =
+			    SUM('GHG_avg'[Grid injection emissions kt CO₂-eq yr⁻¹])
+			VAR Fert =
+			    SUM('GHG_avg'[Fertilizer Avoided Emissions kt CO₂-eq yr⁻¹])
+			VAR Waste =
+			    SUM('GHG_avg'[Waste Management Avoided Emissions kt CO₂-eq yr⁻¹])
+			VAR NG =
+			    SUM('GHG_avg'[NG Avoided Emissions kt CO₂-eq yr⁻¹])
+			
+			RETURN
+			SWITCH(
+			    SELECTEDVALUE(Components[Component]),
+			    "BioRefinery", Refinery,
+			    "Feedstock Transport", FS_transport,
+			    "Grid injection transport", GI_transport,
+			    "Fertilizer", Fert,
+			    "Natural Gas", NG,
+			    "Waste Management", Waste,
+			    "Net Impact", Refinery + FS_transport + GI_transport + Fert + Waste + NG
+			)
+		formatString: 0
+		lineageTag: 3f8b91e8-280d-42cd-971b-a3e37965e973
+
+	column Component
+		lineageTag: 15179481-a09c-49ff-bed0-70cf5a51a74c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Component]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Components = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Component", STRING,
+				    {
+				        {"BioRefinery"},
+				        {"Feedstock Transport"},
+				        {"Grid injection transport"},
+				        {"Fertilizer"},
+				        {"Natural Gas"},
+				        {"Waste Management"}
+				    }
+				)
+
+	annotation PBI_Id = 100c69c212fd49efa6c57ccca2dbae72
+

@@ -1,0 +1,276 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.2.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY25SU12",
+      "reportVersionAtImport": {
+        "visual": "2.5.0",
+        "report": "3.1.0",
+        "page": "2.3.0"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "BioRede_Blue_Sequential1038345981845881716.json",
+      "reportVersionAtImport": {
+        "visual": "2.6.0",
+        "report": "3.1.0",
+        "page": "2.3.0"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "ChicletSlicer1448559807354"
+  ],
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY25SU12",
+          "path": "BaseThemes/CY25SU12.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "BIO_MET_TEXT_BLUE24340385562775535.svg",
+          "path": "BIO_MET_TEXT_BLUE24340385562775535.svg",
+          "type": "Image"
+        },
+        {
+          "name": "BioRede_Blue_Sequential1038345981845881716.json",
+          "path": "BioRede_Blue_Sequential1038345981845881716.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "BIOREDE_ICON_BLUE1537409557296846.svg",
+          "path": "BIOREDE_ICON_BLUE1537409557296846.svg",
+          "type": "Image"
+        },
+        {
+          "name": "BIOREDE_ICON_BLUE1845884560284563.svg",
+          "path": "BIOREDE_ICON_BLUE1845884560284563.svg",
+          "type": "Image"
+        },
+        {
+          "name": "BIOREDE_ICON_BLUE5249853189473606.svg",
+          "path": "BIOREDE_ICON_BLUE5249853189473606.svg",
+          "type": "Image"
+        },
+        {
+          "name": "BIOREDE_ICON_BLUE755826775100684.svg",
+          "path": "BIOREDE_ICON_BLUE755826775100684.svg",
+          "type": "Image"
+        },
+        {
+          "name": "BIOREDE_ICON_BLUE8096172818465431.svg",
+          "path": "BIOREDE_ICON_BLUE8096172818465431.svg",
+          "type": "Image"
+        },
+        {
+          "name": "carbon_intensity19296564994112553.svg",
+          "path": "carbon_intensity19296564994112553.svg",
+          "type": "Image"
+        },
+        {
+          "name": "CO2_ICON_BLUE03125189780079407.svg",
+          "path": "CO2_ICON_BLUE03125189780079407.svg",
+          "type": "Image"
+        },
+        {
+          "name": "CO2_ICON_BLUE43678691612070764.svg",
+          "path": "CO2_ICON_BLUE43678691612070764.svg",
+          "type": "Image"
+        },
+        {
+          "name": "CO2_ICON_BLUE6249582393258053.svg",
+          "path": "CO2_ICON_BLUE6249582393258053.svg",
+          "type": "Image"
+        },
+        {
+          "name": "CO2_ICON_WHITE5766665518475549.svg",
+          "path": "CO2_ICON_WHITE5766665518475549.svg",
+          "type": "Image"
+        },
+        {
+          "name": "COST_TEXT_BLUE024149022439298284.svg",
+          "path": "COST_TEXT_BLUE024149022439298284.svg",
+          "type": "Image"
+        },
+        {
+          "name": "ECO_FUEL_STATION_ICON_BLUE33082702130439845.svg",
+          "path": "ECO_FUEL_STATION_ICON_BLUE33082702130439845.svg",
+          "type": "Image"
+        },
+        {
+          "name": "ECO_FUEL_STATION_ICON_BLUE3782978843828334.svg",
+          "path": "ECO_FUEL_STATION_ICON_BLUE3782978843828334.svg",
+          "type": "Image"
+        },
+        {
+          "name": "ECO_FUEL_STATION_ICON_BLUE6384208786569027.svg",
+          "path": "ECO_FUEL_STATION_ICON_BLUE6384208786569027.svg",
+          "type": "Image"
+        },
+        {
+          "name": "ECO_FUEL_STATION_ICON_BLUE6965560102332794.svg",
+          "path": "ECO_FUEL_STATION_ICON_BLUE6965560102332794.svg",
+          "type": "Image"
+        },
+        {
+          "name": "ECO_FUEL_STATION_ICON_WHITE9109057963533714.svg",
+          "path": "ECO_FUEL_STATION_ICON_WHITE9109057963533714.svg",
+          "type": "Image"
+        },
+        {
+          "name": "EM_VAB_ICON_WHITE17880568142477415.svg",
+          "path": "EM_VAB_ICON_WHITE17880568142477415.svg",
+          "type": "Image"
+        },
+        {
+          "name": "EURO_ICON_BLUE24905570391003773.svg",
+          "path": "EURO_ICON_BLUE24905570391003773.svg",
+          "type": "Image"
+        },
+        {
+          "name": "EURO_ICON_BLUE54580572802088.svg",
+          "path": "EURO_ICON_BLUE54580572802088.svg",
+          "type": "Image"
+        },
+        {
+          "name": "EURO_ICON_BLUE7335644764814185.svg",
+          "path": "EURO_ICON_BLUE7335644764814185.svg",
+          "type": "Image"
+        },
+        {
+          "name": "GHG_EMISSIONS_TEXT3849695345270826.svg",
+          "path": "GHG_EMISSIONS_TEXT3849695345270826.svg",
+          "type": "Image"
+        },
+        {
+          "name": "house-svgrepo-blue817132581121188.svg",
+          "path": "house-svgrepo-blue817132581121188.svg",
+          "type": "Image"
+        },
+        {
+          "name": "INFO_ICON_BLUE4443411372156594.svg",
+          "path": "INFO_ICON_BLUE4443411372156594.svg",
+          "type": "Image"
+        },
+        {
+          "name": "INFO_ICON_BLUE5117257099473077.svg",
+          "path": "INFO_ICON_BLUE5117257099473077.svg",
+          "type": "Image"
+        },
+        {
+          "name": "INFO_ICON_BLUE8587152223019907.svg",
+          "path": "INFO_ICON_BLUE8587152223019907.svg",
+          "type": "Image"
+        },
+        {
+          "name": "INFO_ICON_WHITE6701342952983378.svg",
+          "path": "INFO_ICON_WHITE6701342952983378.svg",
+          "type": "Image"
+        },
+        {
+          "name": "KPI_Cost_blue_1030729415879133692.svg",
+          "path": "KPI_Cost_blue_1030729415879133692.svg",
+          "type": "Image"
+        },
+        {
+          "name": "logo-in20178222110673810346.png",
+          "path": "logo-in20178222110673810346.png",
+          "type": "Image"
+        },
+        {
+          "name": "Menu_Dashboard_SC5008371307816052.svg",
+          "path": "Menu_Dashboard_SC5008371307816052.svg",
+          "type": "Image"
+        },
+        {
+          "name": "net_emission_impact34588945060943843.svg",
+          "path": "net_emission_impact34588945060943843.svg",
+          "type": "Image"
+        },
+        {
+          "name": "net_emission_impact7360658375485648.svg",
+          "path": "net_emission_impact7360658375485648.svg",
+          "type": "Image"
+        },
+        {
+          "name": "paper-sheet-svgrepo-com44300838603976755.svg",
+          "path": "paper-sheet-svgrepo-com44300838603976755.svg",
+          "type": "Image"
+        },
+        {
+          "name": "person_icon_blue6325419091360767.svg",
+          "path": "person_icon_blue6325419091360767.svg",
+          "type": "Image"
+        },
+        {
+          "name": "shape_map_min33925599991819133.json",
+          "path": "shape_map_min33925599991819133.json",
+          "type": "ShapeMap"
+        },
+        {
+          "name": "vab_icon_blue6683010068102815.svg",
+          "path": "vab_icon_blue6683010068102815.svg",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useScaledTooltips": true,
+    "useDefaultAggregateDisplayName": true,
+    "customMemoryLimit": "1048576",
+    "customTimeoutLimit": "225"
+  },
+  "slowDataSourceSettings": {
+    "isCrossHighlightingDisabled": false,
+    "isSlicerSelectionsButtonEnabled": false,
+    "isFilterSelectionsButtonEnabled": false,
+    "isFieldWellButtonEnabled": false,
+    "isApplyAllButtonEnabled": false
+  }
+}

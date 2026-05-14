@@ -1,0 +1,333 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 589.0410749879602,
+        "y": 470868.49315068492
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 568,
+            "y": 474173.38729764841
+          },
+          "nodeIndex": "Subsetor",
+          "nodeLineageTag": "8013ab39-72cc-48db-a8b4-697111462815",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1277.7808219178082,
+            "y": 474824.42839353887
+          },
+          "nodeIndex": "Year",
+          "nodeLineageTag": "7731ee29-b284-4ce4-a4cc-5c14bb639703",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1540.1638719325022,
+            "y": 473881.756181761
+          },
+          "nodeIndex": "Biomethane_potential",
+          "nodeLineageTag": "31367177-81f8-4a3a-a8d7-573e598cbf49",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1540.1638719325019,
+            "y": 473588.20138724049
+          },
+          "nodeIndex": "Biomethane_potential_TOP10",
+          "nodeLineageTag": "a9fefaaf-6fa3-41b0-b46e-37ebecf7b424",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 1540.1638719325022,
+            "y": 473318.19771785761
+          },
+          "nodeIndex": "Bio_met_pot",
+          "nodeLineageTag": "479c446f-b25d-4ac5-ae94-39c7a8c50ae3",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1257.191269192776,
+            "y": 473092.57589778985
+          },
+          "nodeIndex": "Municipality",
+          "nodeLineageTag": "3a950d42-0321-4c19-bbcd-45f5ad941ffc",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 472702.58329736273
+          },
+          "nodeIndex": "Biomethane_potential_avg",
+          "nodeLineageTag": "3bdee115-4802-4d4c-80c6-b645b3ac58f8",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 472318.62017342547
+          },
+          "nodeIndex": "Biomethane_potential_avg_TOP10",
+          "nodeLineageTag": "2fac99d6-5465-4a91-9c84-809b5ebf4e2d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 471018.97620733111
+          },
+          "nodeIndex": "Cost",
+          "nodeLineageTag": "f6f06a4c-bead-42fe-b3b0-ab923b0d558c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 470539.52415230277
+          },
+          "nodeIndex": "CHP",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 469490.16110575077
+          },
+          "nodeIndex": "Cost_TOP10",
+          "nodeLineageTag": "18e72060-7dfd-4a71-9171-2fee0eca10cd",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 468467.93504544179
+          },
+          "nodeIndex": "Cost_avg",
+          "nodeLineageTag": "b95f6428-107e-4515-99a5-34ebba37ec8d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 467183.36822349479
+          },
+          "nodeIndex": "Cost_avg_TOP10",
+          "nodeLineageTag": "d891c30b-7f57-415b-9499-01598d5f8c2a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 463867.9798439595
+          },
+          "nodeIndex": "Nuts3",
+          "nodeLineageTag": "67aad967-7ee1-44f1-bdb5-a02ac752bcd3",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 461590.68396719237
+          },
+          "nodeIndex": "Nuts2",
+          "nodeLineageTag": "1b28ee71-26db-42c6-a83e-8f6b7191bb31",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 458779.57182979753
+          },
+          "nodeIndex": "Municipality_treemap",
+          "nodeLineageTag": "91330e7c-31da-4043-9c56-5735d85e210c",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 455481.13572321093
+          },
+          "nodeIndex": "GHG",
+          "nodeLineageTag": "524edc36-9145-4e87-81f6-945c2c39e788",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 451568.92158227559
+          },
+          "nodeIndex": "Components",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 446707.09841469355
+          },
+          "nodeIndex": "GHG_TOP10",
+          "nodeLineageTag": "bf2bfe42-1d49-4d4c-bd3f-69ac5d823236",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 441040.22171187779
+          },
+          "nodeIndex": "Practice",
+          "nodeLineageTag": "cd560ef1-a944-4eb4-b2e0-ace332ddc601",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 433912.8892171664
+          },
+          "nodeIndex": "GHG_avg",
+          "nodeLineageTag": "739525e7-12c7-43e3-bdf0-84a71cd995bd",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 389572.31097349932
+          },
+          "nodeIndex": "GHG_avg_TOP10",
+          "nodeLineageTag": "2598ded4-a068-4e8e-a402-1b56765915c0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 353137.95442734973
+          },
+          "nodeIndex": "Total_per_area",
+          "nodeLineageTag": "00b8a344-742a-4bc7-9220-31631eb0335b",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1256.1638719325022,
+            "y": 178555.8884588778
+          },
+          "nodeIndex": "Supply",
+          "nodeLineageTag": "f77d3441-6382-45b8-bf02-e075b2e19115",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 97.333333333333343,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

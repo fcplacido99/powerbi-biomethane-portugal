@@ -1,0 +1,34 @@
+table CHP
+	lineageTag: 8027ce2b-bb94-4436-9707-05ad10c435b6
+
+	measure CHP_selected = ```
+			
+			CONCATENATEX(
+			    VALUES('CHP'[CHP_or_not]), 
+			    'CHP'[CHP_or_not], 
+			    ", "
+			)
+			```
+		lineageTag: dca61fcc-34ae-4d8d-97c7-5a62eed78113
+
+	column CHP_or_not
+		dataType: string
+		lineageTag: b1871917-2776-44d7-bb60-bc1731514473
+		summarizeBy: none
+		sourceColumn: CHP_or_not
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CHP = m
+		mode: import
+		source =
+				let
+				    Origem = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcvYIUIrViVby81cAM2MB", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [CHP_or_not = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Origem,{{"CHP_or_not", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

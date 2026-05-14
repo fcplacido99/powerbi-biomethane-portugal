@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "c4b9ab543116e931961c",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 5000,
+    "height": 720,
+    "width": 50,
+    "tabOrder": 6000
+  },
+  "visualGroup": {
+    "displayName": "Menu lateral abaerto",
+    "groupMode": "ScaleMode"
+  }
+}

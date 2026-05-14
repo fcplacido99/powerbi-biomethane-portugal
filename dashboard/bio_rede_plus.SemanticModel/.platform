@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "bio_rede_plus"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a8b83944-1b6d-40a4-a6a8-b50e5bea5360"
+  }
+}

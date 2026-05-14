@@ -1,0 +1,27 @@
+table Supply
+	lineageTag: f77d3441-6382-45b8-bf02-e075b2e19115
+
+	measure '__Selected Supply' =
+			
+			CONCATENATEX(VALUES('Supply'[Supply]), 'Supply'[Supply], " | ")
+		lineageTag: 6f1811f2-fb2c-4bc2-b16b-5e1e3d0e29bd
+
+	column Supply
+		dataType: string
+		lineageTag: d6b61cf6-92c0-49d4-947d-a2d49e803cb2
+		summarizeBy: none
+		sourceColumn: Supply
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Supply = m
+		mode: import
+		source =
+				let
+				    Origem = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W8skvV4rViVbyTU3JLM0FMz0y0zOUYmMB", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Supply = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Origem,{{"Supply", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

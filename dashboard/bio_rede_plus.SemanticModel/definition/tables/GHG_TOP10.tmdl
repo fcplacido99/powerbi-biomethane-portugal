@@ -1,0 +1,214 @@
+table GHG_TOP10
+	lineageTag: bf2bfe42-1d49-4d4c-bd3f-69ac5d823236
+
+	measure MunicipalityRank_GHG =
+			
+			RANKX(
+			    ALL(GHG_TOP10[Municipality]),
+			    CALCULATE(SUM(GHG_TOP10[Net CO2eq yr-1])),
+			    ,
+			    ASC,
+			    DENSE
+			)
+		formatString: 0
+		lineageTag: 81c30cf4-512b-441b-9ed3-a24d6c96b1a8
+
+	measure RankWithSymbol_GHG = FORMAT([MunicipalityRank_GHG], "#") & "º"
+		lineageTag: 359ce6de-8308-463f-895f-ed92b8f0e177
+
+	column Municipality
+		dataType: string
+		lineageTag: 10cc8c41-e6c6-4772-a463-18473eef2755
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: Municipality
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHP_or_not
+		dataType: string
+		lineageTag: 81985cc2-cdf3-470f-ba1c-b28e4cf4aadf
+		summarizeBy: none
+		sourceColumn: CHP_or_not
+
+		annotation SummarizationSetBy = Automatic
+
+	column Practice
+		dataType: string
+		lineageTag: 8f14212a-8aa5-4c49-95cc-fb3fb965f03b
+		summarizeBy: none
+		sourceColumn: Practice
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'g CO₂-eq / MJ'
+		dataType: string
+		lineageTag: 6f7690f7-0a71-43a5-aa2c-b98fc6983b72
+		summarizeBy: none
+		sourceColumn: g CO₂-eq / MJ
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BioRefinery Emissions kt CO₂-eq yr⁻¹'
+		dataType: string
+		lineageTag: 7bbc4444-765f-472f-a52d-62fde50b0f1e
+		summarizeBy: none
+		sourceColumn: BioRefinery Emissions kt CO₂-eq yr⁻¹
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedstock Transport Emissions kt CO₂-eq yr⁻¹'
+		dataType: string
+		lineageTag: dcd1d6ce-a845-43d7-8342-8a37d2c0d2dc
+		summarizeBy: none
+		sourceColumn: Feedstock Transport Emissions kt CO₂-eq yr⁻¹
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grid injection transport emissions kt CO₂-eq yr⁻¹'
+		dataType: string
+		lineageTag: 50777fcb-1567-4a1a-b5d2-214ca36d9aca
+		summarizeBy: none
+		sourceColumn: Grid injection transport emissions kt CO₂-eq yr⁻¹
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fertilizer Avoided Emissions kt CO₂-eq yr⁻¹'
+		dataType: string
+		lineageTag: 1265266e-80c2-436b-8415-a3bd00fd13e2
+		summarizeBy: none
+		sourceColumn: Fertilizer Avoided Emissions kt CO₂-eq yr⁻¹
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Waste Management Avoided Emissions kt CO₂-eq yr⁻¹'
+		dataType: string
+		lineageTag: 5435c606-9f8d-4fda-91d7-2247d8ea9d4f
+		summarizeBy: none
+		sourceColumn: Waste Management Avoided Emissions kt CO₂-eq yr⁻¹
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NG Avoided Emissions kt CO₂-eq yr⁻¹'
+		dataType: string
+		lineageTag: 090fce7f-b372-4599-8ed1-921761b591f1
+		summarizeBy: none
+		sourceColumn: NG Avoided Emissions kt CO₂-eq yr⁻¹
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'kg CO₂-eq / m3'
+		dataType: string
+		lineageTag: c1a849ff-2dcf-41a0-816c-74f1c5094800
+		summarizeBy: none
+		sourceColumn: kg CO₂-eq / m3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Municipality_lower
+		dataType: string
+		lineageTag: eaca57a5-7897-4738-986d-5d08e9978bcc
+		summarizeBy: none
+		sourceColumn: Municipality_lower
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts2
+		dataType: string
+		lineageTag: f2fca77d-8fb1-42d3-bf10-5c10874f127a
+		summarizeBy: none
+		sourceColumn: Nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts3
+		dataType: string
+		lineageTag: 8f9de194-af3c-4598-b096-99accc30db1f
+		summarizeBy: none
+		sourceColumn: Nuts3
+
+		annotation SummarizationSetBy = Automatic
+
+	column STANDARD_NO_CHP
+		dataType: string
+		lineageTag: 7a8b50b9-25e0-449c-baa2-169215e51d6d
+		summarizeBy: none
+		sourceColumn: STANDARD_NO_CHP
+
+		annotation SummarizationSetBy = Automatic
+
+	column STANDARD_CHP
+		dataType: string
+		lineageTag: 72986a65-f3f3-4e82-96d8-b03a798c58e8
+		summarizeBy: none
+		sourceColumn: STANDARD_CHP
+
+		annotation SummarizationSetBy = Automatic
+
+	column BP_NO_CHP
+		dataType: string
+		lineageTag: 3d976c4c-624d-4a00-a358-755e1fe069be
+		summarizeBy: none
+		sourceColumn: BP_NO_CHP
+
+		annotation SummarizationSetBy = Automatic
+
+	column BP_CHP
+		dataType: string
+		lineageTag: 0991ea64-abaf-466c-8877-6b7f46d76031
+		summarizeBy: none
+		sourceColumn: BP_CHP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Difference Potential'
+		dataType: string
+		lineageTag: 062af752-ef0f-4922-b6a7-f6138d63a385
+		summarizeBy: none
+		sourceColumn: Difference Potential
+
+		annotation SummarizationSetBy = Automatic
+
+	column Net_STANDARD_NO_CHP
+		dataType: string
+		lineageTag: 9676293f-fc6a-4c5b-86f8-bfffd3c001b9
+		summarizeBy: none
+		sourceColumn: Net_STANDARD_NO_CHP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Net CO2eq yr-1'
+		dataType: double
+		lineageTag: b2135db7-52da-43de-8b64-babd8f11d1ce
+		summarizeBy: sum
+		sourceColumn: Net CO2eq yr-1
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Abatement Cost €/ t CO₂-eq yr⁻¹'
+		dataType: string
+		lineageTag: cc63cf7e-6cac-4529-96f0-c70f59c60c34
+		summarizeBy: none
+		sourceColumn: Abatement Cost €/ t CO₂-eq yr⁻¹
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GHG_TOP10 = m
+		mode: import
+		source =
+				let
+				    Origem = Excel.Workbook(File.Contents("C:\Users\fcpla\OneDrive\BioRede\biomethane_potential_cleaned.xlsx"), null, true),
+				    GHG_Sheet = Origem{[Item="GHG",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(GHG_Sheet, [PromoteAllScalars=true]),
+				    #"Colunas com Nome Mudado" = Table.RenameColumns(#"Cabeçalhos Promovidos",{{"Net Emissions kt", "Net CO2eq yr-1"}})
+				in
+				    #"Colunas com Nome Mudado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

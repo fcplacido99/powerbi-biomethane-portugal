@@ -1,0 +1,453 @@
+table Cost_avg
+	lineageTag: b95f6428-107e-4515-99a5-34ebba37ec8d
+
+	measure Input_sum_avg =
+			IF (
+			    ISFILTERED('Cost_avg'[Municipality]),
+			    SUM('Cost_avg'[BioReferiny Scale Input (tonnes)])/1000,
+			    SUM('Cost_avg'[BioReferiny Scale Input (tonnes)])/1000
+			)
+		lineageTag: 6c14079b-a6b9-4fe5-a2d5-4641b319b576
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Output_sum_avg =
+			IF (
+			    ISFILTERED('Cost_avg'[Municipality]),
+			    SUM('Cost_avg'[BioRefinery Scale Output Nm⁻³ ])/1000,
+			    SUM('Cost_avg'[BioRefinery Scale Output Nm⁻³ ])/1000
+			)
+		lineageTag: 54b736eb-af8e-4256-9109-eff11e4c2780
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure KPI_input_kt_avg = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [Input_sum_avg] > 10,
+			        FORMAT([Input_sum_avg], "#,##0") & " kt",
+			    [Input_sum_avg] > 1 && [Input_sum_avg] <= 10,
+			        FORMAT([Input_sum_avg], "#,##0.0") & " kt",
+			    [Input_sum_avg] <= 1, 
+			        FORMAT([Input_sum_avg], "#,##0.00") & " kt"
+			)
+			```
+		lineageTag: cfd4cd1a-b479-4396-af5a-5075d62f66e4
+
+	measure KPI_output_kt_avg = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [Output_sum_avg] > 10,
+			        FORMAT([Output_sum_avg], "#,##0") & " kNm³",
+			    [Output_sum_avg] > 1 && [Output_sum_avg] <= 10,
+			        FORMAT([Output_sum_avg], "#,##0.0") & " kNm³",
+			    [Output_sum_avg] <= 1, 
+			        FORMAT([Output_sum_avg], "#,##0.00") & " kNm³"
+			)
+			```
+		lineageTag: 5a36cd1d-10f5-404e-89e6-0fad1a3e27ba
+
+	measure Cost_total_sum_avg = ```
+			IF (
+			    ISFILTERED('Municipality'[Municipality]),
+			    SUM(Cost_avg[TOTAL €/Nm-3])*SUM(Cost_avg[BioRefinery Scale Output Nm⁻³ ]),
+			    MEDIAN(Cost_avg[TOTAL €/Nm-3])
+			)
+			
+			
+			```
+		lineageTag: b9ba196e-f09c-43e8-8095-3ae3c4b8e4ee
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure sentence_kpi_input_outout_avg =
+			
+			VAR nMuni = COUNTROWS(VALUES('Municipality'[Municipality]))
+			VAR v = [Cost_total_or_median_avg]
+			RETURN
+			IF(
+			    nMuni = 1,
+			    "Total cost: " & FORMAT(v/1e6, "#,##0.00") & " M€",
+			    "Average cost: " & FORMAT(v, "#,##0.00") & " €/Nm³"
+			)
+			
+			
+			//VAR _output = [KPI_output_kt_avg]
+			//VAR _input = [KPI_input_kt_avg]
+			//VAR _cost = [Cost_total_sum_avg]/(1000*1000)
+			//RETURN
+			//    IF (
+			//        ISFILTERED('Municipality'[Municipality]),
+			//        "Total cost: " & FORMAT(_cost, "#,##0.00") & " M€",
+			//        "Median cost: " & FORMAT(_cost*1000*1000, "#,##0.00") & " €/Nm³"
+			//    )
+		lineageTag: 6f40a39a-ce41-4bc9-a335-8638bde9f018
+
+	measure Avg_cost_€_per_Nm3_avg =
+			
+			CALCULATE(
+			    AVERAGEX(
+			        VALUES('Municipality'[Municipality]),
+			        CALCULATE( SUM('Cost_avg'[TOTAL €/Nm-3]) )
+			    ),
+			    REMOVEFILTERS('Municipality')
+			)
+		lineageTag: 705202ee-c250-4d12-b414-00f9214e5d8f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Avg_cost_€_per_Nm3_municipal_avg =
+			
+			VAR _oneMun = HASONEVALUE('Municipality'[Municipality])
+			RETURN
+			IF(
+			    _oneMun,
+			    -- single municipality: just its value
+			    SUM('Cost_avg'[TOTAL €/Nm-3]),
+			    -- multiple (or none): average across the municipalities currently selected
+			    AVERAGEX(
+			        VALUES('Municipality'[Municipality]),
+			        CALCULATE( SUM('Cost_avg'[TOTAL €/Nm-3]) )
+			    )
+			)
+		lineageTag: 17b93d70-288e-415c-9ee1-1b7f33df28a9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure LCOE_Avg_cost_€_per_MWh_avg = ```
+			
+			VAR _pci_GJ_per_NM3 = 0.03797
+			VAR _pci_MWh_per_NM3 = _pci_GJ_per_NM3*(1/3.6)
+			VAR _LCOE_volume = [Avg_cost_€_per_Nm3_avg]
+			RETURN
+			    _LCOE_volume/_pci_MWh_per_NM3
+			
+			```
+		lineageTag: b91eca32-00b2-4600-a18e-f21325029d57
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure LCOE_Avg_cost_€_per_MWh_municipal_avg =
+			
+			VAR _pci_GJ_per_NM3 = 0.03797
+			VAR _pci_MWh_per_NM3 = _pci_GJ_per_NM3*(1/3.6)
+			VAR _LCOE_volume = [Avg_cost_€_per_Nm3_municipal_avg]
+			RETURN
+			    _LCOE_volume/_pci_MWh_per_NM3
+		lineageTag: bef1d790-179e-48c5-9016-d545280afc8f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure sentence_lcoe_avg =
+			
+			VAR v = [LCOE_Avg_cost_€_per_MWh_adaptive_avg]
+			RETURN
+			IF(
+			    ISBLANK(v),
+			    "n/a €/MWh",
+			    "Average LCOE: " & FORMAT(v, "#,##0") & " €/MWh"
+			)
+			
+			//VAR _lcoe_nacional = [LCOE_Avg_cost_€_per_MWh_avg]
+			//VAR _lcoe_municipal = [LCOE_Avg_cost_€_per_MWh_municipal_avg]
+			//
+			//RETURN
+			//    IF (
+			//        [Municipio_selecionado] = "Mainland Portugal",
+			//        FORMAT(_lcoe_nacional, "#,##0") & " €/MWh",
+			//        FORMAT(_lcoe_municipal, "#,##0") & " €/MWh"
+			//    )
+		lineageTag: a0028c12-cb71-48e9-84fd-18001cf83ede
+
+	measure sentence_baseline_ng_price_avg =
+			
+			IF (
+			    ISFILTERED('Municipality'[Municipality]),
+			    "Reference gas price: " & FORMAT(AVERAGE('Cost_avg'[Municipality threshold (€/MWh)]), "#,##0.00") & " €/MWh",
+			    "Reference gas price: 93 €/MWh"
+			)
+		lineageTag: 8d1a0700-8feb-49d8-85ed-f7f90d988b5d
+
+	measure sentence_test_abat_cost = ```
+			"X €/tCO₂e" 
+			```
+		lineageTag: 304c12ef-90e1-4b38-b14f-a4913bc43061
+
+	measure sentence_test_ef = ```
+			"EF gas: Y tCO₂e/MWh"  
+			```
+		lineageTag: 8912ac4a-37ee-4d3e-b377-41d53bde1569
+
+	measure KPI_AC_Best_practice_avg = "Best practice: " & FORMAT([AbatementCost_avg_Best_Practice], "#,##0.00") & " €/tCO₂e"
+		lineageTag: 35dbeb5f-0934-4393-a60e-f88576339279
+
+	measure KPI_AC_Standard_avg = "Standard practice: " & FORMAT([AbatementCost_avg_Standard], "#,##0.00") & " €/tCO₂e"
+		lineageTag: 220789bf-9db5-4aa3-a649-9ac6419a4f85
+
+	measure Cost_total_or_median_avg =
+			
+			VAR muniSel = VALUES('Municipality'[Municipality])
+			VAR nMuni   = COUNTROWS(muniSel)
+			
+			VAR cost_single =
+			    CALCULATE(
+			        SUM('Cost_avg'[TOTAL €/Nm-3]),
+			        TREATAS(VALUES('Supply'[Supply]), 'Cost_avg'[Supply]),
+			        TREATAS(VALUES('CHP'[CHP_or_not]), 'Cost_avg'[CHP_or_not]),
+			        TREATAS(VALUES('Practice'[Practice]), 'Cost_avg'[Practice])
+			    )
+			    *
+			    CALCULATE(
+			        SUM('Cost_avg'[BioRefinery Scale Output Nm⁻³ ]),
+			        TREATAS(VALUES('Supply'[Supply]), 'Cost_avg'[Supply]),
+			        TREATAS(VALUES('CHP'[CHP_or_not]), 'Cost_avg'[CHP_or_not]),
+			        TREATAS(VALUES('Practice'[Practice]), 'Cost_avg'[Practice])
+			    )
+			
+			VAR muniWithData =
+			    FILTER(
+			        muniSel,
+			        NOT ISBLANK( CALCULATE([Cost_€_per_Nm3_per_muni_avg]) )
+			    )
+			
+			VAR median_cost =
+			    MEDIANX(
+			        muniWithData,
+			        CALCULATE([Cost_€_per_Nm3_per_muni_avg])
+			    )
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    nMuni = 1, cost_single,
+			    -- 0 or 2+ municipalities: median €/Nm³ of the municipalities currently in context
+			    median_cost
+			)
+		lineageTag: 0ca8dfc1-d01c-4c6e-8f12-52f640f4e704
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Cost_€_per_Nm3_per_muni_avg =
+			
+			CALCULATE(
+			    MAX('Cost_avg'[TOTAL €/Nm-3]),
+			    TREATAS(VALUES('Supply'[Supply]), 'Cost_avg'[Supply]),
+			    TREATAS(VALUES('CHP'[CHP_or_not]), 'Cost_avg'[CHP_or_not]),
+			    TREATAS(VALUES('Practice'[Practice]), 'Cost_avg'[Practice])
+			)
+		lineageTag: 1eca74ff-53ed-4e60-a05e-cf24d7f586fa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure LCOE_Avg_cost_€_per_MWh_adaptive_avg =
+			
+			VAR _pci_GJ_per_NM3  = 0.03797
+			VAR _pci_MWh_per_NM3 = _pci_GJ_per_NM3 / 3.6
+			VAR v = [Avg_cost_€_per_Nm3_adaptive_avg]
+			RETURN
+			DIVIDE(v, _pci_MWh_per_NM3)
+		lineageTag: 3c1a7cdf-3044-4cc8-aed0-85442791d925
+
+	measure Avg_cost_€_per_Nm3_adaptive_avg =
+			
+			VAR muniSel = VALUES('Municipality'[Municipality])
+			VAR nMuni   = COUNTROWS(muniSel)
+			VAR muniWithData =
+			    FILTER(
+			        muniSel,
+			        NOT ISBLANK( CALCULATE([Cost_€_per_Nm3_per_muni_avg]) )
+			    )
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    nMuni = 0,
+			        AVERAGEX(muniWithData, CALCULATE([Cost_€_per_Nm3_per_muni_avg])),
+			    nMuni = 1,
+			        CALCULATE([Cost_€_per_Nm3_per_muni_avg]),
+			    AVERAGEX(muniWithData, CALCULATE([Cost_€_per_Nm3_per_muni_avg]))
+			)
+		lineageTag: 03929c56-f491-4bb9-a72c-5fb0cc7b5226
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Municipality
+		dataType: string
+		lineageTag: 7001fbfe-5a4c-40fb-ae55-a71e66290744
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: Municipality
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHP_or_not
+		dataType: string
+		lineageTag: 70bfbc5f-e543-462a-a753-19741766e856
+		summarizeBy: none
+		sourceColumn: CHP_or_not
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BioReferiny Scale Input (tonnes)'
+		dataType: int64
+		formatString: 0
+		lineageTag: f8ee8506-9f9d-4565-85bf-f91e6706e160
+		summarizeBy: sum
+		sourceColumn: BioReferiny Scale Input (tonnes)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BioRefinery Scale Output Nm⁻³ '
+		dataType: int64
+		formatString: 0
+		lineageTag: c21ae209-37a1-49b2-9289-9de7cc5120a2
+		summarizeBy: sum
+		sourceColumn: "BioRefinery Scale Output Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CAPEX €/Nm⁻³ '
+		dataType: double
+		lineageTag: 7a4c65a5-711a-4adf-84ca-9d49ed1fef89
+		summarizeBy: sum
+		sourceColumn: "CAPEX €/Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'OPEX €/Nm⁻³ '
+		dataType: double
+		lineageTag: 377a15e3-d923-4d28-ade4-612cf7f75c4d
+		summarizeBy: sum
+		sourceColumn: "OPEX €/Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GRID INJECTION €/Nm⁻³ '
+		dataType: double
+		lineageTag: ca3a59cb-487e-4a66-b329-d16cf2822a54
+		summarizeBy: sum
+		sourceColumn: "GRID INJECTION €/Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'TRANSPORT €/Nm⁻³ '
+		dataType: double
+		lineageTag: 5522b139-7a6b-4220-acb0-da5a0468f17d
+		summarizeBy: sum
+		sourceColumn: "TRANSPORT €/Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Municipality_lower
+		dataType: string
+		lineageTag: 2d99a78b-0220-494a-bb4a-5c0df65cb669
+		summarizeBy: none
+		sourceColumn: Municipality_lower
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts2
+		dataType: string
+		lineageTag: a3d299e4-55fe-4437-9979-c625c5352995
+		summarizeBy: none
+		sourceColumn: Nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts3
+		dataType: string
+		lineageTag: ea6e0edb-9a31-4840-bc28-5b1ef0ada422
+		summarizeBy: none
+		sourceColumn: Nuts3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Índice
+		dataType: int64
+		formatString: 0
+		lineageTag: 99dce680-900d-44bd-beb8-5ead8bbc330a
+		summarizeBy: none
+		sourceColumn: Índice
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TOTAL €/Nm-3'
+		dataType: double
+		lineageTag: 112ffe0e-486b-45a0-a9cc-5058a9fa0661
+		summarizeBy: sum
+		sourceColumn: TOTAL €/Nm-3
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Supply
+		dataType: string
+		lineageTag: 138523dd-ab89-40e8-bc51-19f6bcf29b1f
+		summarizeBy: none
+		sourceColumn: Supply
+
+		annotation SummarizationSetBy = Automatic
+
+	column Practice
+		dataType: string
+		lineageTag: 9c7b8716-7314-4258-bac6-880819c300fd
+		summarizeBy: none
+		sourceColumn: Practice
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Municipality threshold (€/MWh)'
+		dataType: double
+		lineageTag: 9c6bd102-d64e-4b79-9359-0ec5ad0343cb
+		summarizeBy: sum
+		sourceColumn: Municipality threshold (€/MWh)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'LCOE municipality (€/MWh)'
+		dataType: double
+		lineageTag: 3f4c64b1-d02d-41a9-b059-7c21584a9c52
+		summarizeBy: sum
+		sourceColumn: LCOE municipality (€/MWh)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Cost_avg = m
+		mode: import
+		source =
+				let
+				    Origem = Excel.Workbook(File.Contents("C:\Users\fcpla\OneDrive\BioRede\biomethane_potential_cleaned.xlsx"), null, true),
+				    Cost_avg_Sheet = Origem{[Item="Cost_avg",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos1" = Table.PromoteHeaders(Cost_avg_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos1",{{"Municipality", type text}, {"CHP_or_not", type text}, {"Practice", type text}, {"BioReferiny Scale Input (tonnes)", type number}, {"BioRefinery Scale Output Nm⁻³ ", type number}, {"CAPEX €/Nm⁻³ ", type number}, {"OPEX €/Nm⁻³ ", type number}, {"GRID INJECTION €/Nm⁻³ ", type number}, {"TRANSPORT €/Nm⁻³ ", type number}, {"Municipality_lower", type text}, {"Nuts2", type text}, {"Nuts3", type text}, {"Municipality threshold (€/MWh)", type number}, {"LCOE municipality (€/MWh)", type number}}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tipo Alterado1",{{"Municipality", type text}, {"CHP_or_not", type text}, {"BioReferiny Scale Input (tonnes)", Int64.Type}, {"BioRefinery Scale Output Nm⁻³ ", Int64.Type}, {"CAPEX €/Nm⁻³ ", type number}, {"OPEX €/Nm⁻³ ", type number}, {"GRID INJECTION €/Nm⁻³ ", type number}, {"TRANSPORT €/Nm⁻³ ", type number}, {"Municipality_lower", type text}, {"Nuts2", type text}, {"Nuts3", type text}}),
+				    #"Consultas Intercaladas" = Table.NestedJoin(#"Tipo Alterado", {"Municipality_lower"}, Municipality, {"Municipality_lower"}, "Municipality.1", JoinKind.LeftOuter),
+				    #"Municipality.1 Expandida" = Table.ExpandTableColumn(#"Consultas Intercaladas", "Municipality.1", {"Índice"}, {"Índice"}),
+				    #"Personalizado Adicionado" = Table.AddColumn(#"Municipality.1 Expandida", "Personalizado", each [#"CAPEX €/Nm⁻³ "] + [#"OPEX €/Nm⁻³ "] + [#"GRID INJECTION €/Nm⁻³ "] + [#"TRANSPORT €/Nm⁻³ "]),
+				    #"Colunas com Nome Mudado" = Table.RenameColumns(#"Personalizado Adicionado",{{"Personalizado", "TOTAL €/Nm-3"}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Colunas com Nome Mudado","Ponte de Sôr","Ponte de Sor",Replacer.ReplaceText,{"Municipality"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","Santa Maria da Feira","Feira",Replacer.ReplaceText,{"Municipality"}),
+				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Valor Substituído1", "Supply", each if [#"BioReferiny Scale Input (tonnes)"] > 30000 then "High" else if [#"BioReferiny Scale Input (tonnes)"] > 15000 then "Medium" else "Low")
+				in
+				    #"Coluna Condicional Adicionada"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

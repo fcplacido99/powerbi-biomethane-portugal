@@ -1,0 +1,32 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "282be09e5280aed0389b",
+  "position": {
+    "x": 5,
+    "y": 180,
+    "z": 6000,
+    "height": 40,
+    "width": 45,
+    "tabOrder": 0
+  },
+  "visualGroup": {
+    "displayName": "Total_icon group",
+    "groupMode": "ScaleMode",
+    "objects": {
+      "lockAspect": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "parentGroupName": "b6e76733ae210cd57cce"
+}

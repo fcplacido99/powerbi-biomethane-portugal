@@ -1,0 +1,44 @@
+table Subsetor
+	lineageTag: 8013ab39-72cc-48db-a8b4-697111462815
+
+	column Subsetor
+		dataType: string
+		lineageTag: 7308c6b2-e7aa-49dd-9292-e0e233d7957e
+		summarizeBy: none
+		sourceColumn: Subsetor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subsector1
+		dataType: string
+		lineageTag: 0c4fdf39-02f4-4aed-b1c1-ced994ce2ed0
+		summarizeBy: none
+		sourceColumn: Subsector1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Setor
+		dataType: string
+		lineageTag: 89a01227-f728-4e52-951e-8069410503af
+		summarizeBy: none
+		sourceColumn: Setor
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Subsetor = m
+		mode: import
+		source =
+				let
+				    Origem = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("ZdG/bgIxDAbwV4luRki9tg+AVAb2boghJOZk6RIjx+F9UAfUgYmtq1+sXBIk/qyff4k+2et1t/Rzw5DQQ3RoMXWzbjV/6zazOnIUgMvAgMGYBCU7pHiTfZGr6PUvCaNNRtjGtCMO1hPbqt5fFETgQX8FXSMfhSwGRpdHyWxL+lnS7+nLPbGAYfJ0QD0y0gRuVe/EDpgfSf9MgmU9C4Y2r+0WB7R60p8W1j5fsKeEJTYepkXp2WdKJullRE+l+30LsQGikNkijXoZ0D2+a7x/5lejxyFfF1Nukdt6a4/NPw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Subsetor = _t, Subsector1 = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Origem,{{"Subsetor", type text}, {"Subsector1", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","Ed. comerciais e institucionais","Ed. serviços",Replacer.ReplaceText,{"Subsetor"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","Indústrias energéticas","Energia",Replacer.ReplaceText,{"Subsetor"}),
+				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Valor Substituído1", "Setor", each if [Subsector1] = "I.1" then "Edifícios" else if [Subsector1] = "I.2" then "Edifícios" else if [Subsector1] = "I.3" then "Indústrias transformadoras" else if [Subsector1] = "I.4" then "Energia" else if [Subsector1] = "I.5" then "Agricultura" else if [Subsector1] = "II.1" then "Transportes" else if [Subsector1] = "II.2" then "Transportes" else if [Subsector1] = "II.3" then "Transportes" else if [Subsector1] = "II.4" then "Transportes" else if [Subsector1] = "III.1" then "Resíduos e águas residuais" else if [Subsector1] = "III.2" then "Resíduos e águas residuais" else if [Subsector1] = "III.4" then "Resíduos e águas residuais" else null),
+				    Personalizado1 = Table.InsertRows(#"Coluna Condicional Adicionada", 5, {[Subsetor="Distribuição de gás natural", Subsector1="I.8", Setor="Emissões fugitivas"]})
+				in
+				    Personalizado1
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,569 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "79da06b60b06486070cd",
+  "position": {
+    "x": 50.068027210884352,
+    "y": 0,
+    "z": 1000,
+    "height": 719.81859410430832,
+    "width": 1229.9319727891157,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "BioRede+ Decision-Support Tool",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "The BioRede+ tool provides a municipal-scale spatial assessment of biomethane production potential in mainland Portugal based on the anaerobic co-digestion of agricultural and agro-industrial residues. The tool integrates geospatial data, techno-economic modelling and greenhouse gas (GHG) accounting to support evidence-based planning of biomethane deployment. The analysis estimates three levels of biomethane potential and evaluates the associated climate mitigation and economic performance under alternative plant configurations. These outputs support territorial planning, infrastructure development and policy design for renewable gas deployment. ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "1. Biomethane Production Potential",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "The assessment distinguishes between theoretical, technical and implementation potential, reflecting progressively more realistic constraints on biomethane production for the baseline year of 2024 and the decade average (2015-2024). The ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "theoretical biomethane potential",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " represents the maximum amount of biomethane that could be produced from available feedstocks under ideal conversion conditions.",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, sans-serif",
+                      "fontSize": "11pt",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "It is calculated based on: ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, sans-serif",
+                      "fontSize": "11pt",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Feedstock availability and properties (INE, 2024-2014; IFAP, 2024; Portugal-Pereira et al, 2015; Sales et al, 2022; Simões et al, 2023; Manzone et al, 2016; Tsarouhas et al, 2015; IVV, 2025; Zhang et al, 2017;  Ferreira et al, 2017) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Feedstock composition (ECN, 2025; Dai et al, 2020; Niu et al, 2016; Nitsos et al, 2015; Fernandez-Escobar et al, 2015; Yilmaz et al, 2017; Ayadi et al, 2020; El Achkar et al, 2016; Luke, 2024) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "The ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "technical biomethane potential",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " adjusts the theoretical potential to reflect realistic conversion performance and operational constraints. It therefore represents the maximum achievable biomethane production under defined technological conditions.",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " The calculation incorporates: ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "sustainable feedstock recovery rates (Talamanca et al, 2023; Ferreira et al, 2017; Portugal- Pereira et al, 2015) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "methane production efficiency in anaerobic co-digestion under standard and best available practice (BAT) operational condition (Luke, 2024; Buffi et al, 2024) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "biomethane upgrading efficiency, process configuration assumptions, including plant energy system configuration (with and without CHP unit) (Luke, 2024) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Four technological configurations are considered in the modelling framework: ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Standard configuration",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "fontStyle": "italic",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": ": Represents typical operational performance observed in existing anaerobic digestion systems. It assumes conventional methane leakage levels, standard digestate management practices and typical upgrading performance. ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Best Available Technology (BAT) configuration",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "fontStyle": "italic",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": ": Represents an optimised plant design incorporating methane leak detection and repair programmes (LDAR), improved digestate storage systems, lower methane slip during upgrading, and enhanced energy efficiency.  ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Energy system powered by CHP configuration",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "fontStyle": "italic",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": ": A share of the produced biogas is combusted in a combined heat and power unit to supply the plant’s internal electricity and heat demand. This configuration improves energy self-sufficiency and operational resilience, but slightly reduces the volume of biomethane available for injection. ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "No-CHP configuration",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "fontStyle": "italic",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": ": All produced biogas is upgraded to biomethane. This configuration maximises biomethane output, but increases external electricity and heat demand and may lead to higher operational costs and indirect emissions depending on the electricity mix. ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "The ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "implementation potential",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " represents the biomethane production that can realistically be deployed at the municipal level once logistical, infrastructural and economic constraints are considered. The modelling framework incorporates: ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Transport distances and logistics (expert opinion) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Plant scale and configuration (Luke, 2024; Tribe & Alpine, 1986) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Grid injection pathways (pipeline or trucking) (Pasini et al, 2019) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Capital and operational costs (Luke, 2024; Haeldermans et al, 2020, expert opinion) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "GHG mitigation performance (IPCC, 2006) ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2. GHG Assessment",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "The GHG analysis evaluates the emissions",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " (tCO₂e)",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " associated with biomethane production and the avoided emissions resulting from fossil natural gas (NG) substitution and improved waste management and fertiliser substitution.  The GHG accounting follows a cradle-to-grid system boundary, including upstream processes (feedstock collection and handling, feedstock transport, anaerobic digestion process emissions, methane leakage, and digestate management), processing (biogas upgrading to biomethane, energy use for plant operation) and downstream processes (transport to injection point and injection into the gas network). The avoided emissions include: displacement of fossil NG, improved manure and residue management, and substitution of synthetic fertilisers through digestate use.  ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "3. Economic Assessment",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "color": "windowtext"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "windowtext"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "The economic analysis evaluates the cost ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "(€",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "/Nm3",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": ") ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "of biomethane production and its climate mitigation performance. The cost analysis follows a cradle-to-grid cost boundary, including: capital expenditure (CAPEX), operational expenditure (OPEX), and the transport to injection points either via pipeline connection, or road transport of compressed biomethane. The economic assessment calculates the marginal abatement cost (MAC) expressed in €/tCO₂e avoided. The MAC compares the cost of biomethane production with the avoided emissions relative to fossil NG use. ",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F5F5F5'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

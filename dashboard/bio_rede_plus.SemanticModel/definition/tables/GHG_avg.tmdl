@@ -1,0 +1,409 @@
+table GHG_avg
+	lineageTag: 739525e7-12c7-43e3-bdf0-84a71cd995bd
+
+	measure Avg_carbon_intensity_avg =
+			
+			MEDIAN('GHG_avg'[g CO₂-eq / MJ])
+		lineageTag: 0c870be6-a011-4093-86de-9852c44fcd7f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure sentence1_CI_avg = ```
+			
+			VAR _media = [Avg_STANDARD_NO_CHP_avg]
+			RETURN
+			    "vs Baseline (Standard Practice, No CHP): " & FORMAT(_media, "#,0.00") & " g CO₂-eq / MJ" 
+			```
+		lineageTag: 6315c899-f1fb-4204-bbe6-92eff3ceca68
+
+	measure Avg_STANDARD_NO_CHP_avg =
+			
+			MEDIAN('GHG_avg'[STANDARD_NO_CHP])
+		lineageTag: 2e046230-8e72-4e5e-9d1d-cdeb9febe8a8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure sentence2_CI_avg =
+			
+			VAR _ci   = [Avg_carbon_intensity_avg]
+			VAR _base = [Avg_STANDARD_NO_CHP_avg]
+			VAR _d    = _ci - _base
+			VAR _d_percentagem = _d/_base * (100)
+			VAR _sign = IF(_d > 0, "+", "")
+			RETURN
+			"Δ = " & _sign & FORMAT(_d, "0.00") & " g CO₂-eq / MJ"// & " (" & _sign & FORMAT(_d_percentagem, "0.00") & "%)"
+		lineageTag: efb6a73e-845e-4099-81e9-5f8ba2e9b851
+
+	measure KPI_color_sentence2_CI_avg =
+			
+			VAR _sel = [Avg_carbon_intensity_avg] - [Avg_STANDARD_NO_CHP_avg]
+			RETURN
+			SWITCH(
+			    TRUE()
+			    , _sel < 0, "Green"
+			    , _sel > 0, "Red"
+			    , "#012B3D"
+			)
+		lineageTag: e3c1cf84-b7e6-44e7-9c65-5b9742f557d7
+
+	measure SUM_net_em_impact_Avg =
+			
+			SUM('GHG_avg'[Net CO2eq yr-1])
+		formatString: 0
+		lineageTag: 1e138ea3-109b-4b8a-a171-67afdf6cfb15
+
+	measure SUM_NET_STANDARD_NO_CHP_avg =
+			
+			SUM('GHG_avg'[Net_STANDARD_NO_CHP])
+		formatString: 0
+		lineageTag: 3c3ab3c4-46e6-47ab-bd6e-aa4f8f80c9b9
+
+	measure sentence1_NEI_avg =
+			
+			VAR _media = [SUM_NET_STANDARD_NO_CHP_avg]
+			RETURN
+			    "vs Baseline (Standard Practice, No CHP): " & FORMAT(_media, "#,0.00") & " kt CO₂-eq / yr"
+		lineageTag: 51fa5fba-54a1-4874-8238-d8b62de78e3a
+
+	measure sentence2_NEI_avg =
+			
+			VAR _ci   = [SUM_net_em_impact_Avg]
+			VAR _base = [SUM_NET_STANDARD_NO_CHP_avg]
+			VAR _d    = _ci - _base
+			VAR _d_percentagem = _d/_ci * (-100)
+			VAR _sign = IF(_d > 0, "+", "")
+			RETURN
+			"Δ = " & _sign & FORMAT(_d, "0.00") & " kt CO₂-eq / yr"// & " (" & _sign & FORMAT(_d_percentagem, "0.00") & "%)"
+		lineageTag: bfa0fbee-7054-499c-a8ff-252c877f3eac
+
+	measure KPI_color_sentence2_NEI_avg =
+			
+			VAR _sel = [SUM_net_em_impact_Avg] - [SUM_NET_STANDARD_NO_CHP_avg]
+			RETURN
+			SWITCH(
+			    TRUE()
+			    , _sel < 0, "Green"
+			    , _sel > 0, "Red"
+			    , "#012B3D"
+			)
+		lineageTag: 0d2ebbf8-c732-45c3-aa98-85558682cb2f
+
+	measure Titulo_mapa_ghg_avg =
+			
+			IF([Municipio_selecionado] = "Mainland Portugal",
+			    [CHP_selected] & ", " & [Practice_selected]  & " - Net GHG emissions",
+			    [CHP_selected] & ", " & [Practice_selected]  & " - Net GHG emissions(" & [Municipio_selecionado] & ")"
+			    )
+		lineageTag: 23e721c6-4dc1-4877-861d-c872ba1ce42a
+
+	measure AbatementCost_avg_Best_Practice =
+			
+			VAR isMainland = [Municipio_selecionado] = "Mainland Portugal"
+			
+			
+			RETURN
+			CALCULATE(
+			    IF(
+			        isMainland,
+			        AVERAGE('GHG_avg'[Abatement Cost €/ t CO₂-eq yr⁻¹])/1000,
+			        AVERAGE('GHG_avg'[Abatement Cost €/ t CO₂-eq yr⁻¹])/1000
+			    ),
+			    REMOVEFILTERS('Practice'[Practice]),
+			    'Practice'[Practice] = "Best Practice"
+			)
+		formatString: 0
+		lineageTag: cab50e25-97c7-495a-a022-2326c092f656
+
+	measure AbatementCost_avg_Standard =
+			
+			
+			VAR isMainland = [Municipio_selecionado] = "Mainland Portugal"
+			
+			RETURN
+			CALCULATE(
+			    IF(
+			        isMainland,
+			        AVERAGE('GHG_avg'[Abatement Cost €/ t CO₂-eq yr⁻¹])/1000,
+			        AVERAGE('GHG_avg'[Abatement Cost €/ t CO₂-eq yr⁻¹])/1000
+			    ),
+			    REMOVEFILTERS('Practice'[Practice]),
+			    'Practice'[Practice] = "Standard"
+			)
+		formatString: 0
+		lineageTag: 1d390977-9922-4b78-9771-4a767f7cc5f1
+
+	column Municipality
+		dataType: string
+		lineageTag: 3e5a45e7-c914-477f-a1c1-096a46da7949
+		summarizeBy: none
+		sourceColumn: Municipality
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHP_or_not
+		dataType: string
+		lineageTag: adde5123-d0a6-404e-8a76-8428f68bb9eb
+		summarizeBy: none
+		sourceColumn: CHP_or_not
+
+		annotation SummarizationSetBy = Automatic
+
+	column Practice
+		dataType: string
+		lineageTag: e92a64fd-d679-4305-b76f-6645f68b1d79
+		summarizeBy: none
+		sourceColumn: Practice
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'g CO₂-eq / MJ'
+		dataType: double
+		lineageTag: cf9a8bc3-fdd0-4056-a0dc-efb1257970b6
+		summarizeBy: sum
+		sourceColumn: g CO₂-eq / MJ
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Municipality_lower
+		dataType: string
+		lineageTag: 4ff3fb4c-8477-44bd-b591-88e40dc6d14d
+		summarizeBy: none
+		sourceColumn: Municipality_lower
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts2
+		dataType: string
+		lineageTag: 2b082abf-4fe5-42ef-a470-72b992117cfc
+		summarizeBy: none
+		sourceColumn: Nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts3
+		dataType: string
+		lineageTag: d394b573-9231-418c-af67-ff2a2cc1cb70
+		summarizeBy: none
+		sourceColumn: Nuts3
+
+		annotation SummarizationSetBy = Automatic
+
+	column STANDARD_NO_CHP
+		dataType: double
+		lineageTag: a046c769-ad9c-42f9-ab47-9eeb9328a003
+		summarizeBy: sum
+		sourceColumn: STANDARD_NO_CHP
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STANDARD_CHP
+		dataType: double
+		lineageTag: 78aa1081-9b1d-4556-8cae-1f49dc27795c
+		summarizeBy: sum
+		sourceColumn: STANDARD_CHP
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BP_NO_CHP
+		dataType: double
+		lineageTag: 92154a04-921f-4843-a51e-e13e1f4bd067
+		summarizeBy: sum
+		sourceColumn: BP_NO_CHP
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BP_CHP
+		dataType: double
+		lineageTag: b90b5355-3981-4dea-8852-4ccd3be049b0
+		summarizeBy: sum
+		sourceColumn: BP_CHP
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Difference Potential'
+		dataType: double
+		lineageTag: 369765d3-6d5c-499c-bcca-5627f13789ea
+		summarizeBy: sum
+		sourceColumn: Difference Potential
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Net_STANDARD_NO_CHP
+		dataType: double
+		lineageTag: 7d054e6c-9d9d-4c88-b9f0-45d227eee785
+		summarizeBy: sum
+		sourceColumn: Net_STANDARD_NO_CHP
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'BioRefinery Emissions kt CO₂-eq yr⁻¹'
+		dataType: double
+		lineageTag: 5e1a1776-bcc8-439c-8d74-f2c31d7013c2
+		summarizeBy: sum
+		sourceColumn: BioRefinery Emissions kt CO₂-eq yr⁻¹
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Feedstock Transport Emissions kt CO₂-eq yr⁻¹'
+		dataType: double
+		lineageTag: 923baebe-e671-4526-be17-7f97858d69f6
+		summarizeBy: sum
+		sourceColumn: Feedstock Transport Emissions kt CO₂-eq yr⁻¹
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Fertilizer Avoided Emissions kt CO₂-eq yr⁻¹'
+		dataType: double
+		lineageTag: d07203d7-3dac-41e7-bedb-02a3b40615c0
+		summarizeBy: sum
+		sourceColumn: Fertilizer Avoided Emissions kt CO₂-eq yr⁻¹
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Waste Management Avoided Emissions kt CO₂-eq yr⁻¹'
+		dataType: double
+		lineageTag: 83a69a90-caa2-4203-8b0c-04cecd449520
+		summarizeBy: sum
+		sourceColumn: Waste Management Avoided Emissions kt CO₂-eq yr⁻¹
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'NG Avoided Emissions kt CO₂-eq yr⁻¹'
+		dataType: double
+		lineageTag: a1e84855-657b-40f6-b3b6-792450cc83ba
+		summarizeBy: sum
+		sourceColumn: NG Avoided Emissions kt CO₂-eq yr⁻¹
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'kg CO₂-eq / m3'
+		dataType: string
+		lineageTag: 01e3ccb9-56f5-4609-806d-309adf6b08a1
+		summarizeBy: none
+		sourceColumn: kg CO₂-eq / m3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Índice
+		dataType: int64
+		formatString: 0
+		lineageTag: 34e3a41f-a816-4eb6-89c4-77ad64814907
+		summarizeBy: none
+		sourceColumn: Índice
+
+		annotation SummarizationSetBy = Automatic
+
+	column Supply
+		dataType: string
+		lineageTag: b3c67746-3593-41a4-a156-374f954628a2
+		summarizeBy: none
+		sourceColumn: Supply
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grid injection emissions kt CO₂-eq yr⁻¹'
+		dataType: double
+		lineageTag: 5dfb9805-25dc-4496-865c-82a1f395a5b0
+		summarizeBy: sum
+		sourceColumn: Grid injection emissions kt CO₂-eq yr⁻¹
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Net CO2eq yr-1'
+		dataType: double
+		lineageTag: 11a09e39-b687-4e0a-bc45-03c15dbf3225
+		summarizeBy: sum
+		sourceColumn: Net CO2eq yr-1
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Abatement Cost €/ t CO₂-eq yr⁻¹'
+		dataType: double
+		lineageTag: 0b380ecd-4453-4180-b123-8c79dbb96f47
+		summarizeBy: sum
+		sourceColumn: Abatement Cost €/ t CO₂-eq yr⁻¹
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition GHG_avg = m
+		mode: import
+		source =
+				let
+				    Origem = Excel.Workbook(File.Contents("C:\Users\fcpla\OneDrive\BioRede\biomethane_potential_cleaned.xlsx"), null, true),
+				    GHG_avg_Sheet = Origem{[Item="GHG_avg",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(GHG_avg_Sheet, [PromoteAllScalars=true]),
+				    #"Consultas Intercaladas" = Table.NestedJoin(#"Cabeçalhos Promovidos", {"Municipality_lower"}, Municipality, {"Municipality_lower"}, "Municipality.1", JoinKind.LeftOuter),
+				    #"Municipality.1 Expandida" = Table.ExpandTableColumn(#"Consultas Intercaladas", "Municipality.1", {"Índice"}, {"Índice"}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Municipality.1 Expandida","Santa Maria da Feira","Feira",Replacer.ReplaceText,{"Municipality"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","Ponte de Sôr","Ponte de Sor",Replacer.ReplaceText,{"Municipality"}),
+				    #"Colunas com Nome Mudado" = Table.RenameColumns(#"Valor Substituído1",{{"Net Emissions kt", "Net CO2eq yr-1"}}),
+				    #"Consultas Intercaladas1" = Table.NestedJoin(#"Colunas com Nome Mudado", {"Municipality_lower"}, Cost_avg, {"Municipality_lower"}, "Cost_avg", JoinKind.LeftOuter),
+				    #"Cost_avg Expandida" = Table.ExpandTableColumn(#"Consultas Intercaladas1", "Cost_avg", {"Supply"}, {"Supply"}),
+				    #"Duplicados Removidos" = Table.Distinct(#"Cost_avg Expandida", {"Municipality", "CHP_or_not", "Practice"})
+				in
+				    #"Duplicados Removidos"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

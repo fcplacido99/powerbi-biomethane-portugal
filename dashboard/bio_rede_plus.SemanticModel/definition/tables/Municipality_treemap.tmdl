@@ -1,0 +1,128 @@
+table Municipality_treemap
+	lineageTag: 91330e7c-31da-4043-9c56-5735d85e210c
+
+	measure 'Total Biomethane (Nm3)' =
+			
+			SUM ( Biomethane_potential[Total Biomethane Production (Nm³)] )
+		lineageTag: 6858de6a-85bd-4fc3-aadd-42bd4024513a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Biomethane (Nm3) - Treemap (Selected NUTS3)' =
+			
+			VAR _nuts3 = [Selected Nuts3]
+			RETURN
+			CALCULATE(
+			    [Total Biomethane (Nm3)],
+			    REMOVEFILTERS(Municipality),  -- ignore municipality slicer filtering
+			
+			    -- If no municipality selected, don't restrict treemap.
+			    FILTER(
+			        ALL(Municipality_treemap[Nuts3]),
+			        ISBLANK(_nuts3) || Municipality_treemap[Nuts3] = _nuts3
+			    )
+			)
+		lineageTag: ca98068f-a46c-4610-9e3a-ce7ffacbf372
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Selected NUTS3' =
+			
+			VAR _munKey = SELECTEDVALUE( Municipality[Índice] )
+			RETURN
+			CALCULATE(
+			    SELECTEDVALUE( Municipality[NUTS3] ),
+			    FILTER( ALL(Municipality), Municipality[Índice] = _munKey )
+			)
+		lineageTag: 8e4e05b1-dd41-48cd-9bb3-b23fca0372c4
+
+	column Municipality
+		dataType: string
+		lineageTag: 346910bb-eac4-4372-9c89-005559a8151f
+		summarizeBy: none
+		sourceColumn: Municipality
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts2
+		dataType: string
+		lineageTag: c624090e-9f11-4f4c-9d98-f1a8dd8c874c
+		summarizeBy: none
+		sourceColumn: Nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts3
+		dataType: string
+		lineageTag: a6582d6d-bfcc-4d9e-887b-6ebc7c416fd3
+		summarizeBy: none
+		sourceColumn: Nuts3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Municipality_lower
+		dataType: string
+		lineageTag: 028717f2-9a89-43fc-888e-70f2120d7462
+		summarizeBy: none
+		sourceColumn: Municipality_lower
+
+		annotation SummarizationSetBy = Automatic
+
+	column Índice
+		dataType: int64
+		formatString: 0
+		lineageTag: ca3fe681-36f3-456f-98e5-611f9d3b31c3
+		summarizeBy: none
+		sourceColumn: Índice
+
+		annotation SummarizationSetBy = Automatic
+
+	column Índice_nuts2
+		dataType: string
+		lineageTag: d579dc24-b798-49a6-836d-bbd8f36eebc6
+		summarizeBy: none
+		sourceColumn: Índice_nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Índice_nuts3
+		dataType: string
+		lineageTag: e3fbadcb-f9e7-41a9-a2a9-263ebbf9230f
+		summarizeBy: none
+		sourceColumn: Índice_nuts3
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Nuts3 Hierarquia'
+		lineageTag: 26113544-c9f0-41f1-8875-000be7700a34
+
+		level Nuts3
+			lineageTag: 0d054eea-c6cf-42d6-8073-b8247f884243
+			column: Nuts3
+
+		level Municipality
+			lineageTag: 2c4a57ad-3ee3-4a74-9f77-c71cefcf8526
+			column: Municipality
+
+	partition Municipality_treemap = m
+		mode: import
+		source =
+				let
+				    Origem = Excel.Workbook(File.Contents("C:\Users\fcpla\OneDrive\BioRede\biomethane_potential_cleaned.xlsx"), null, true),
+				    Municipality_Sheet = Origem{[Item="Municipality",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Municipality_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Municipality", type text}, {"Nuts2", type text}, {"Nuts3", type text}, {"Municipality_lower", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado1","Santa Maria da Feira","Feira",Replacer.ReplaceText,{"Municipality"}),
+				    #"Índice Adicionado" = Table.AddIndexColumn(#"Valor Substituído", "Índice", 1, 1, Int64.Type),
+				    #"Consultas Intercaladas" = Table.NestedJoin(#"Índice Adicionado", {"Nuts2"}, Nuts2, {"Nuts2"}, "Nuts2.1", JoinKind.LeftOuter),
+				    #"Nuts2.1 Expandida" = Table.ExpandTableColumn(#"Consultas Intercaladas", "Nuts2.1", {"Índice_nuts2"}, {"Índice_nuts2"}),
+				    #"Consultas Intercaladas1" = Table.NestedJoin(#"Nuts2.1 Expandida", {"Nuts3"}, Nuts3, {"Nuts3"}, "Nuts3.1", JoinKind.LeftOuter),
+				    #"Nuts3.1 Expandida" = Table.ExpandTableColumn(#"Consultas Intercaladas1", "Nuts3.1", {"Índice_nuts3"}, {"Índice_nuts3"})
+				in
+				    #"Nuts3.1 Expandida"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

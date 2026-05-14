@@ -1,0 +1,12 @@
+# Power BI Desktop Project (PBIP) local artifacts
+# Recommended by Microsoft for PBIP source control
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Temporary / lock files
+~$*
+*.tmp
+
+# OS artifacts
+.DS_Store
+Thumbs.db

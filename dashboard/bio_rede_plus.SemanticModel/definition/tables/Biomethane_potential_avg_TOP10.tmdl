@@ -1,0 +1,237 @@
+table Biomethane_potential_avg_TOP10
+	lineageTag: 2fac99d6-5465-4a91-9c84-809b5ebf4e2d
+
+	measure MunicipalityRank_biomet_AVG =
+			
+			RANKX(
+			    ALL(Biomethane_potential_avg_TOP10[Municipality]),
+			    CALCULATE(SUM(Biomethane_potential_avg_TOP10[Total Biomethane Production (Nm³)])),
+			    ,
+			    DESC,
+			    DENSE
+			)
+		formatString: 0
+		lineageTag: 979fd586-07ab-4605-8e80-1ebc76f80377
+
+	measure RankWithSymbol_biomet_avg = FORMAT([MunicipalityRank_biomet_AVG], "#") & "º"
+		lineageTag: 76d5924b-938d-4d53-a1ec-fe09b1de4b05
+
+	column Municipality
+		dataType: string
+		lineageTag: eb9fe995-eb06-4c87-835f-8642569b75fb
+		summarizeBy: none
+		sourceColumn: Municipality
+
+		annotation SummarizationSetBy = Automatic
+
+	column Biomethane_potential
+		dataType: string
+		lineageTag: 487a9fd4-694a-4ffd-a6bb-fb3d3bba18fa
+		summarizeBy: none
+		sourceColumn: Biomethane_potential
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Olive OIl Residue Biomethane Production (Nm³)'
+		dataType: double
+		lineageTag: 1a61ad31-1d1d-4c56-90ae-aeff97b68f11
+		summarizeBy: sum
+		sourceColumn: Olive OIl Residue Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Bovine  Biomethane Production (Nm³)'
+		dataType: double
+		lineageTag: 638e50ac-5049-4691-bae2-ef737fd837a9
+		summarizeBy: sum
+		sourceColumn: Bovine  Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Swine Residue Biomethane Production (Nm³)'
+		dataType: double
+		lineageTag: 452ab242-eb78-453a-9a32-cb7c1bf520ec
+		summarizeBy: sum
+		sourceColumn: Swine Residue Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Olive Prunings  Biomethane Production (Nm³)'
+		dataType: double
+		formatString: 0
+		lineageTag: ad284222-6d1f-436f-ae84-61b736c70033
+		summarizeBy: sum
+		sourceColumn: Olive Prunings  Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vine  Prunings  Biomethane Production (Nm³)'
+		dataType: double
+		formatString: 0
+		lineageTag: f12727fd-14da-4e4c-b6b3-a14e418a3961
+		summarizeBy: sum
+		sourceColumn: Vine  Prunings  Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Wheat Residue Biomethane Production (Nm³)'
+		dataType: double
+		formatString: 0
+		lineageTag: 85959358-5836-4edc-b074-ea8b6861d30b
+		summarizeBy: sum
+		sourceColumn: Wheat Residue Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Corn Residue Biomethane Production (Nm³)'
+		dataType: double
+		formatString: 0
+		lineageTag: 45c6e68b-0a76-4b28-9394-b56548136693
+		summarizeBy: sum
+		sourceColumn: Corn Residue Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rice  Residue Biomethane Production (Nm³)'
+		dataType: double
+		formatString: 0
+		lineageTag: aac4e692-9fc3-4dbe-af9a-1ef658ab2f5c
+		summarizeBy: sum
+		sourceColumn: Rice  Residue Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Cerealst Residue Biomethane Production (Nm³)'
+		dataType: double
+		formatString: 0
+		lineageTag: 58dccb7b-5dab-415b-9fd5-37dae2829261
+		summarizeBy: sum
+		sourceColumn: Other Cerealst Residue Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Municipality_lower
+		dataType: string
+		lineageTag: 9804a2e8-fd9a-49dd-a2a9-a81e267ab6b9
+		summarizeBy: none
+		sourceColumn: Municipality_lower
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts2
+		dataType: string
+		lineageTag: 2537f194-8c45-4e64-bceb-db96f30449e8
+		summarizeBy: none
+		sourceColumn: Nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts3
+		dataType: string
+		lineageTag: 6f322e47-40d8-4490-9586-7816cb6f7ec5
+		summarizeBy: none
+		sourceColumn: Nuts3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Índice
+		dataType: int64
+		formatString: 0
+		lineageTag: 34a1d6c3-608a-4475-a289-80498b37156f
+		summarizeBy: sum
+		sourceColumn: Índice
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Biomethane Production (Nm³)'
+		dataType: double
+		lineageTag: 48b7e84b-5474-4b1d-964e-b096242cc5e5
+		summarizeBy: sum
+		sourceColumn: Total Biomethane Production (Nm³)
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Biomethane Production (kNm³)'
+		dataType: double
+		lineageTag: 58412b19-f0de-4d19-a4b0-a7bf58f4d7e4
+		summarizeBy: sum
+		sourceColumn: Total Biomethane Production (kNm³)
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Biomethane Potential Nm³/ m²'
+		dataType: double
+		lineageTag: 5f293661-ef9a-438a-a6cc-3c25ab2f71fe
+		summarizeBy: sum
+		sourceColumn: Biomethane Potential Nm³/ m²
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Municipality Area'
+		dataType: double
+		lineageTag: f39b5509-bd78-4fed-960e-f61d32c9733a
+		summarizeBy: sum
+		sourceColumn: Municipality Area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Total_per_area
+		dataType: string
+		lineageTag: 350ea3c7-157c-4757-8809-df472f3a6ff8
+		summarizeBy: none
+		sourceColumn: Total_per_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Wine Residue Biomethane Production (Nm³)'
+		dataType: double
+		lineageTag: 992f85e0-d47b-4895-b840-050e4bd4416b
+		summarizeBy: sum
+		sourceColumn: Wine Residue Biomethane Production (Nm³)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Biomethane_potential_avg_TOP10 = m
+		mode: import
+		source =
+				let
+				    Origem = Excel.Workbook(File.Contents("C:\Users\fcpla\OneDrive\BioRede\biomethane_potential_cleaned.xlsx"), null, true),
+				    Biomethane_potential_avg_Sheet = Origem{[Item="Biomethane_potential_avg",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos1" = Table.PromoteHeaders(Biomethane_potential_avg_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos1",{{"Municipality", type text}, {"Biomethane_potential", type text}, {"Total_per_area", type text}, {"Wine Residue Biomethane Production (Nm³)", type number}, {"Olive OIl Residue Biomethane Production (Nm³)", type number}, {"Bovine  Biomethane Production (Nm³)", type number}, {"Swine Residue Biomethane Production (Nm³)", type number}, {"Olive Prunings  Biomethane Production (Nm³)", type number}, {"Vine  Prunings  Biomethane Production (Nm³)", type number}, {"Wheat Residue Biomethane Production (Nm³)", type number}, {"Corn Residue Biomethane Production (Nm³)", type number}, {"Rice  Residue Biomethane Production (Nm³)", type number}, {"Other Cerealst Residue Biomethane Production (Nm³)", type number}, {"Biomethane Potential Nm³/ m²", type number}, {"Municipality Area", type number}, {"Municipality_lower", type text}, {"Nuts2", type text}, {"Nuts3", type text}}),
+				    #"Consultas Intercaladas" = Table.NestedJoin(#"Tipo Alterado1", {"Municipality_lower"}, Municipality, {"Municipality_lower"}, "Municipality.1", JoinKind.LeftOuter),
+				    #"Municipality.1 Expandida" = Table.ExpandTableColumn(#"Consultas Intercaladas", "Municipality.1", {"Índice"}, {"Municipality.1.Índice"}),
+				    #"Colunas com Nome Mudado" = Table.RenameColumns(#"Municipality.1 Expandida",{{"Municipality.1.Índice", "Índice"}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Colunas com Nome Mudado","Ponte de Sôr","Ponte de Sor",Replacer.ReplaceText,{"Municipality"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","Santa Maria da Feira","Feira",Replacer.ReplaceText,{"Municipality"}),
+				    #"Personalizado Adicionado" = Table.AddColumn(#"Valor Substituído1", "Total Biomethane Production (Nm3)", each [#"Wine Residue Biomethane Production (Nm³)"] + [#"Olive OIl Residue Biomethane Production (Nm³)"] + [#"Bovine  Biomethane Production (Nm³)"] + [#"Swine Residue Biomethane Production (Nm³)"] + [#"Olive Prunings  Biomethane Production (Nm³)"] + [#"Vine  Prunings  Biomethane Production (Nm³)"] + [#"Wheat Residue Biomethane Production (Nm³)"] + [#"Corn Residue Biomethane Production (Nm³)"] + [#"Rice  Residue Biomethane Production (Nm³)"] + [#"Other Cerealst Residue Biomethane Production (Nm³)"]),
+				    #"Colunas com Nome Mudado1" = Table.RenameColumns(#"Personalizado Adicionado",{{"Total Biomethane Production (Nm3)", "Total Biomethane Production (Nm³)"}}),
+				    #"Personalizado Adicionado1" = Table.AddColumn(#"Colunas com Nome Mudado1", "Total Biomethane Production (kNm³)", each [#"Total Biomethane Production (Nm³)"]/1000),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Personalizado Adicionado1","Per area","Total per km²",Replacer.ReplaceText,{"Total_per_area"})
+				in
+				    #"Valor Substituído2"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

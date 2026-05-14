@@ -1,0 +1,38 @@
+table Nuts2
+	lineageTag: 1b28ee71-26db-42c6-a83e-8f6b7191bb31
+
+	column Nuts2
+		dataType: string
+		lineageTag: 656752fc-ea39-4ba5-b9e4-331cddac0066
+		summarizeBy: none
+		sourceColumn: Nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Indice_nuts2
+		dataType: int64
+		formatString: 0
+		lineageTag: 9067dbd8-db93-4586-8570-566f092096ac
+		summarizeBy: none
+		sourceColumn: Indice_nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Nuts2 = m
+		mode: import
+		source =
+				let
+				    Origem = Excel.Workbook(File.Contents("C:\Users\fcpla\OneDrive\BioRede\biomethane_potential_cleaned.xlsx"), null, true),
+				    Nuts2_Sheet = Origem{[Item="Nuts2",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Nuts2_Sheet,{{"Column1", type text}}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Nuts2", type text}}),
+				    #"Índice Adicionado" = Table.AddIndexColumn(#"Tipo Alterado1", "Índice", 1, 1, Int64.Type),
+				    #"Colunas com Nome Mudado" = Table.RenameColumns(#"Índice Adicionado",{{"Índice", "Indice_nuts2"}})
+				in
+				    #"Colunas com Nome Mudado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

@@ -1,0 +1,182 @@
+table Cost_TOP10
+	lineageTag: 18e72060-7dfd-4a71-9171-2fee0eca10cd
+
+	measure MunicipalityRank_cost =
+			
+			RANKX(
+			    ALL(Cost_TOP10[Municipality]),
+			    CALCULATE(SUM(Cost_TOP10[TOTAL €/Nm-3])),
+			    ,
+			    ASC,
+			    DENSE
+			)
+		formatString: 0
+		lineageTag: 2753961e-0258-42cf-aafa-d05e50b5e6ca
+
+	measure RankWithSymbol_cost = FORMAT([MunicipalityRank_cost], "#") & "º"
+		lineageTag: ed09425b-c249-49ad-b2ef-43d5bffd1849
+
+	column Municipality
+		dataType: string
+		lineageTag: a9545376-74a3-4643-a0b8-4661b78d2b14
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: Municipality
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHP_or_not
+		dataType: string
+		lineageTag: ccb4ec22-effc-47fb-ab97-8421f03c778a
+		summarizeBy: none
+		sourceColumn: CHP_or_not
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BioReferiny Scale Input (tonnes)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 84b60c93-fc19-47d4-a4ee-4c34699adb35
+		summarizeBy: sum
+		sourceColumn: BioReferiny Scale Input (tonnes)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BioRefinery Scale Output Nm⁻³ '
+		dataType: int64
+		formatString: 0
+		lineageTag: 3666ff3b-13af-4675-b0e7-00820cf7178a
+		summarizeBy: sum
+		sourceColumn: "BioRefinery Scale Output Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CAPEX €/Nm⁻³ '
+		dataType: double
+		lineageTag: fa33c06b-ce96-42d6-a9fc-7219846e4f07
+		summarizeBy: sum
+		sourceColumn: "CAPEX €/Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'OPEX €/Nm⁻³ '
+		dataType: double
+		lineageTag: f3b7e10b-24e2-4265-9c15-65b3f6452000
+		summarizeBy: sum
+		sourceColumn: "OPEX €/Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GRID INJECTION €/Nm⁻³ '
+		dataType: double
+		lineageTag: 82729370-541c-46f4-881a-cbd56987d8de
+		summarizeBy: sum
+		sourceColumn: "GRID INJECTION €/Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'TRANSPORT €/Nm⁻³ '
+		dataType: double
+		lineageTag: 91147a54-050a-4ae3-bc41-76f549dba5d8
+		summarizeBy: sum
+		sourceColumn: "TRANSPORT €/Nm⁻³ "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Municipality_lower
+		dataType: string
+		lineageTag: 4d7bea0d-3769-477a-9cb4-080529c2a38a
+		summarizeBy: none
+		sourceColumn: Municipality_lower
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts2
+		dataType: string
+		lineageTag: 298535d7-5781-4f1e-a092-f05266512266
+		summarizeBy: none
+		sourceColumn: Nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts3
+		dataType: string
+		lineageTag: b0991f75-58be-47f9-8753-a50269ad5340
+		summarizeBy: none
+		sourceColumn: Nuts3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Índice
+		dataType: int64
+		formatString: 0
+		lineageTag: 2dc5df0a-f315-4656-91be-e7207d538fc1
+		summarizeBy: sum
+		sourceColumn: Índice
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TOTAL €/Nm-3'
+		dataType: double
+		lineageTag: 17dd7f8c-4269-4fc9-91da-f92fcb42ebe2
+		summarizeBy: sum
+		sourceColumn: TOTAL €/Nm-3
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Practice
+		dataType: string
+		lineageTag: d1648682-4112-4b7d-9478-44e5931878ad
+		summarizeBy: none
+		sourceColumn: Practice
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Municipality threshold (€/MWh)'
+		dataType: string
+		lineageTag: 4a0c7dab-2e45-4a25-9402-df9c2899b21d
+		summarizeBy: none
+		sourceColumn: Municipality threshold (€/MWh)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LCOE municipality (€/MWh)'
+		dataType: string
+		lineageTag: a7da7364-b0e5-4c8a-a7e7-bc81c8e5d1eb
+		summarizeBy: none
+		sourceColumn: LCOE municipality (€/MWh)
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Cost_TOP10 = m
+		mode: import
+		source =
+				let
+				    Origem = Excel.Workbook(File.Contents("C:\Users\fcpla\OneDrive\BioRede\biomethane_potential_cleaned.xlsx"), null, true),
+				    Cost_Sheet = Origem{[Item="Cost",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Cost_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Municipality", type text}, {"CHP_or_not", type text}, {"BioReferiny Scale Input (tonnes)", Int64.Type}, {"BioRefinery Scale Output Nm⁻³ ", Int64.Type}, {"CAPEX €/Nm⁻³ ", type number}, {"OPEX €/Nm⁻³ ", type number}, {"GRID INJECTION €/Nm⁻³ ", type number}, {"TRANSPORT €/Nm⁻³ ", type number}, {"Municipality_lower", type text}, {"Nuts2", type text}, {"Nuts3", type text}}),
+				    #"Consultas Intercaladas" = Table.NestedJoin(#"Tipo Alterado", {"Municipality_lower"}, Municipality, {"Municipality_lower"}, "Municipality.1", JoinKind.LeftOuter),
+				    #"Municipality.1 Expandida" = Table.ExpandTableColumn(#"Consultas Intercaladas", "Municipality.1", {"Índice"}, {"Índice"}),
+				    #"Personalizado Adicionado" = Table.AddColumn(#"Municipality.1 Expandida", "TOTAL €/Nm-3", each [#"CAPEX €/Nm⁻³ "] + [#"OPEX €/Nm⁻³ "] + [#"GRID INJECTION €/Nm⁻³ "] + [#"TRANSPORT €/Nm⁻³ "]),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Personalizado Adicionado","Ponte de Sôr","Ponte de Sor",Replacer.ReplaceText,{"Municipality"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","Santa Maria da Feira","Feira",Replacer.ReplaceText,{"Municipality"})
+				in
+				    #"Valor Substituído1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

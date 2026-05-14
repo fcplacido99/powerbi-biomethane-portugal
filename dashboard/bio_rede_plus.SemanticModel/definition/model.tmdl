@@ -1,0 +1,41 @@
+model Model
+	culture: pt-PT
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Subsetor","Year","Biomethane_potential","Biomethane_potential_TOP10","Bio_met_pot","Municipality","Biomethane_potential_avg","Biomethane_potential_avg_TOP10","Cost","CHP","Cost_TOP10","Cost_avg","Cost_avg_TOP10","Nuts3","Nuts2","Municipality_treemap","GHG","GHG_TOP10","Practice","GHG_avg","GHG_avg_TOP10","Total_per_area","Supply"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Subsetor
+ref table Year
+ref table Biomethane_potential
+ref table Biomethane_potential_TOP10
+ref table Bio_met_pot
+ref table Municipality
+ref table Biomethane_potential_avg
+ref table Biomethane_potential_avg_TOP10
+ref table Cost
+ref table CHP
+ref table Cost_TOP10
+ref table Cost_avg
+ref table Cost_avg_TOP10
+ref table Nuts3
+ref table Nuts2
+ref table Municipality_treemap
+ref table GHG
+ref table Components
+ref table GHG_TOP10
+ref table Practice
+ref table GHG_avg
+ref table GHG_avg_TOP10
+ref table Total_per_area
+ref table Supply
+
+ref cultureInfo pt-PT
+

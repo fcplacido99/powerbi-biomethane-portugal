@@ -1,0 +1,57 @@
+table Nuts3
+	lineageTag: 67aad967-7ee1-44f1-bdb5-a02ac752bcd3
+
+	column Nuts2
+		dataType: string
+		lineageTag: 4bf084d7-eff9-4f9f-aa99-f0d6d1f1f76a
+		summarizeBy: none
+		sourceColumn: Nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nuts3
+		dataType: string
+		lineageTag: 19691e75-abf6-4ba3-ad9b-d50e3d8e836c
+		summarizeBy: none
+		sourceColumn: Nuts3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Indice_nuts3
+		dataType: int64
+		formatString: 0
+		lineageTag: 980b3a24-01de-458d-a982-c5affe8d25fe
+		summarizeBy: sum
+		sourceColumn: Indice_nuts3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Indice_nuts2
+		dataType: int64
+		formatString: 0
+		lineageTag: dac3c84b-6474-49cc-a33e-b494233df3e4
+		summarizeBy: none
+		sourceColumn: Indice_nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Nuts3 = m
+		mode: import
+		source =
+				let
+				    Origem = Excel.Workbook(File.Contents("C:\Users\fcpla\OneDrive\BioRede\biomethane_potential_cleaned.xlsx"), null, true),
+				    Nuts3_Sheet = Origem{[Item="Nuts3",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Nuts3_Sheet,{{"Column1", type text}, {"Column2", type text}}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Nuts2", type text}, {"Nuts3", type text}}),
+				    #"Índice Adicionado" = Table.AddIndexColumn(#"Tipo Alterado1", "Índice", 1, 1, Int64.Type),
+				    #"Colunas com Nome Mudado" = Table.RenameColumns(#"Índice Adicionado",{{"Índice", "Indice_nuts3"}}),
+				    #"Consultas Intercaladas" = Table.NestedJoin(#"Colunas com Nome Mudado", {"Nuts2"}, Nuts2, {"Nuts2"}, "Nuts2.1", JoinKind.LeftOuter),
+				    #"Nuts2.1 Expandida" = Table.ExpandTableColumn(#"Consultas Intercaladas", "Nuts2.1", {"Indice_nuts2"}, {"Indice_nuts2"})
+				in
+				    #"Nuts2.1 Expandida"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

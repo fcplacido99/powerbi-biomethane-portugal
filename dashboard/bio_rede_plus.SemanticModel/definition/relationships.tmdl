@@ -1,0 +1,167 @@
+relationship AutoDetected_fcd50947-b0aa-4751-be79-367f8879beb0
+	fromColumn: Biomethane_potential.Biomethane_potential
+	toColumn: Bio_met_pot.Biomethane_potential
+
+relationship AutoDetected_54943f2c-7340-4edb-8b1e-025cdf9f35ed
+	fromColumn: Biomethane_potential_TOP10.Biomethane_potential
+	toColumn: Bio_met_pot.Biomethane_potential
+
+relationship 64718dfb-35d4-5792-c1b0-742bdcef70b7
+	fromColumn: Biomethane_potential.Índice
+	toColumn: Municipality.Índice
+
+relationship AutoDetected_bb5f69de-f213-40fe-937c-07b27691d917
+	fromColumn: Biomethane_potential_avg.Biomethane_potential
+	toColumn: Bio_met_pot.Biomethane_potential
+
+relationship 18dbdf55-15b6-4eb2-819f-90670910b15f
+	fromColumn: Biomethane_potential_avg.Índice
+	toColumn: Municipality.Índice
+
+relationship AutoDetected_91cf7efd-148e-4510-8fc0-c922453cbb4c
+	fromColumn: Biomethane_potential_avg_TOP10.Biomethane_potential
+	toColumn: Bio_met_pot.Biomethane_potential
+
+relationship 855c66fb-39a9-2d7c-eecb-ff2cbcc9ea54
+	fromColumn: Cost.Índice
+	toColumn: Municipality.Índice
+
+relationship AutoDetected_231bbc9d-0e6d-4343-83c0-f8ae8229723e
+	fromColumn: Cost.CHP_or_not
+	toColumn: CHP.CHP_or_not
+
+relationship AutoDetected_865ed372-9328-41f5-8fcc-b51e6a77b6d3
+	fromColumn: Cost_TOP10.CHP_or_not
+	toColumn: CHP.CHP_or_not
+
+relationship AutoDetected_75bc17c2-5e0c-4a31-b9f5-766ee9950a10
+	fromColumn: Cost_avg.CHP_or_not
+	toColumn: CHP.CHP_or_not
+
+relationship 69f2259a-75f0-20fa-d95f-93ec9fbb77fe
+	fromColumn: Cost_avg.Índice
+	toColumn: Municipality.Índice
+
+relationship AutoDetected_bcfaacde-dc26-4406-8dc8-d8a092ab3400
+	fromColumn: Cost_avg_TOP10.CHP_or_not
+	toColumn: CHP.CHP_or_not
+
+relationship c8ad05bb-fce8-c19d-1ede-2c4a293bc0cd
+	fromColumn: GHG.CHP_or_not
+	toColumn: CHP.CHP_or_not
+
+relationship AutoDetected_4f8eeb67-a55a-444a-aaf0-a0dd96077235
+	fromColumn: GHG_TOP10.CHP_or_not
+	toColumn: CHP.CHP_or_not
+
+relationship AutoDetected_171b20be-9ad7-4ecb-9356-7b9011c80a57
+	fromColumn: GHG.Practice
+	toColumn: Practice.Practice
+
+relationship AutoDetected_f2b3cf61-b99e-4ea8-ad67-e4574d48c05e
+	fromColumn: GHG_TOP10.Practice
+	toColumn: Practice.Practice
+
+relationship AutoDetected_136363ce-f47b-4dc7-9be4-ffbfb543d8d5
+	fromColumn: GHG_avg.CHP_or_not
+	toColumn: CHP.CHP_or_not
+
+relationship AutoDetected_1dfaba72-e089-4f52-a950-5fbb9e5172c4
+	fromColumn: GHG_avg.Practice
+	toColumn: Practice.Practice
+
+relationship AutoDetected_9c84c540-a8e1-48bb-a520-fbb90a7757db
+	fromColumn: Municipality.Indice_nuts2
+	toColumn: Nuts2.Indice_nuts2
+
+relationship AutoDetected_54664227-2c22-4f70-999f-1c06c539f2b3
+	fromColumn: Nuts3.Indice_nuts2
+	toColumn: Nuts2.Indice_nuts2
+
+relationship AutoDetected_044702cb-a6ce-4d94-b2fd-a357f18cdb21
+	isActive: false
+	fromColumn: Municipality.Indice_nuts3
+	toColumn: Nuts3.Indice_nuts3
+
+relationship ace8f465-6540-8399-de2b-ea4e6610dc84
+	fromColumn: GHG.Índice
+	toColumn: Municipality.Índice
+
+relationship AutoDetected_b96e8eeb-575c-4eb3-8bc9-33aa80b48a0c
+	fromColumn: GHG_avg.Índice
+	toColumn: Municipality.Índice
+
+relationship AutoDetected_6a0649c8-0be0-4db7-8383-260dff03dcd3
+	fromColumn: GHG_avg_TOP10.CHP_or_not
+	toColumn: CHP.CHP_or_not
+
+relationship AutoDetected_664bbb46-cac4-4623-9f92-ff39321b2621
+	fromColumn: GHG_avg_TOP10.Practice
+	toColumn: Practice.Practice
+
+relationship AutoDetected_a967b654-5a22-4989-a434-9875c9234d10
+	fromColumn: Biomethane_potential.Total_per_area
+	toColumn: Total_per_area.Total_per_area
+
+relationship AutoDetected_ff97a18b-a031-4a96-97c4-211cfb328c4e
+	fromColumn: Biomethane_potential_avg.Total_per_area
+	toColumn: Total_per_area.Total_per_area
+
+relationship 044bb3d5-6ae8-208b-ba4d-dd3c43f67a1f
+	fromColumn: Biomethane_potential_TOP10.Total_per_area
+	toColumn: Total_per_area.Total_per_area
+
+relationship AutoDetected_3fa0bc10-2349-44f4-b94f-c9897ae02795
+	fromColumn: Biomethane_potential_avg_TOP10.Total_per_area
+	toColumn: Total_per_area.Total_per_area
+
+relationship AutoDetected_6428ea19-4914-49ea-b810-36fa33a40773
+	fromColumn: Cost.Supply
+	toColumn: Supply.Supply
+
+relationship AutoDetected_fbc86d25-05be-4fd1-91a7-4b735d863706
+	fromColumn: Cost_avg.Supply
+	toColumn: Supply.Supply
+
+relationship AutoDetected_84ea1fdb-ce6d-415d-98ed-a9c0b98430f0
+	fromColumn: GHG.Supply
+	toColumn: Supply.Supply
+
+relationship AutoDetected_6da0ea81-9023-4eb4-890c-4d5beb863251
+	fromColumn: GHG_avg.Supply
+	toColumn: Supply.Supply
+
+relationship AutoDetected_70846221-8ffe-4b18-84d1-7e0bc28fcced
+	fromColumn: GHG_TOP10.Municipality_lower
+	toColumn: Municipality.Municipality_lower
+
+relationship AutoDetected_d999d3ac-f1f2-4e74-a0a1-8c97fe8bef7c
+	fromColumn: GHG_TOP10.Municipality_lower
+	toColumn: Municipality_treemap.Municipality_lower
+
+relationship AutoDetected_0a863703-f722-47da-b5f6-a83832eb60e7
+	isActive: false
+	fromColumn: GHG_TOP10.Nuts2
+	toColumn: Nuts2.Nuts2
+
+relationship AutoDetected_f8fc0d98-d457-4ba9-af83-62af3c19ba6f
+	isActive: false
+	fromColumn: GHG_TOP10.Nuts3
+	toColumn: Nuts3.Nuts3
+
+relationship AutoDetected_00493da2-7a6e-408a-b133-84b277096675
+	fromColumn: Cost.Practice
+	toColumn: Practice.Practice
+
+relationship AutoDetected_22bcbae4-f258-43db-b996-5211092c5d58
+	fromColumn: Cost_TOP10.Practice
+	toColumn: Practice.Practice
+
+relationship AutoDetected_ead87572-a269-4a62-99d7-fcf681fe0533
+	fromColumn: Cost_avg.Practice
+	toColumn: Practice.Practice
+
+relationship AutoDetected_56db27d4-5a47-40bc-adb7-7725f7bb2413
+	fromColumn: Cost_avg_TOP10.Practice
+	toColumn: Practice.Practice
+
